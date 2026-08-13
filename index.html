@@ -358,27 +358,27 @@ const DAYS = [
       {t:"≈08:30", ti:"Traslado al hotel en tren + metro/tranvía", kind:"metro", d:["Tren Airport → Bruxelles-Central (~20 min).","Tranvía 92/93 o metro L2/L6 hasta Louise (~10-15 min) + 5 min a pie.","Alternativa: taxi/Uber directo (~25-30 min)."], url:dir([P.bru,P.hotel],"transit")},
       {t:"≈09:30", ti:"Check-in / dejar maletas en el hotel", d:["Check-in desde las 15:00, pero hay consigna de maletas."], url:pt(P.hotel)},
       {t:"10:00", ti:"Caminar hacia Grand Place", d:["20-25 min a pie por Avenue Louise."], url:dir([P.hotel,P.grandplace],"walking")},
-      {t:"10:25–10:50", ti:"Galerías Reales de San Huberto", d:["Galería del siglo XIX, entrada libre. Chocolaterías Neuhaus, Corné."], url:pt(P.saint_hubert), wiki:["Galerías_Reales_de_San_Huberto","Royal_Galleries_of_Saint-Hubert"]},
-      {t:"11:00–11:45", ti:"Rue Neuve", d:["La calle comercial más concurrida de Bruselas."], url:pt(P.rueneuve)},
+      {t:"10:25–10:50", ti:"Galerías Reales de San Huberto", d:["Galería del siglo XIX, entrada libre. Chocolaterías Neuhaus, Corné."], url:pt(P.saint_hubert), wiki:["Galerías_Reales_de_San_Huberto","Royal_Galleries_of_Saint-Hubert"], img:"img/saint_hubert.jpg"},
+      {t:"11:00–11:45", ti:"Rue Neuve", d:["La calle comercial más concurrida de Bruselas."], url:pt(P.rueneuve), wiki:[null,"Rue_Neuve,_Brussels"], img:"img/rueneuve.jpg"},
       {t:"11:55", ti:"Comida rápida cerca de Rue Neuve", d:["Algo ligero — 20-25 min de caminata hasta el Parlamento."]},
       {t:"12:15", ti:"Caminar hacia Schuman (Barrio Europeo)", d:["20-25 min a pie por Rue de la Loi."], url:dir([P.grandplace,P.parlamento],"walking")},
     ]},
     {name:"Mediodía — Parlamento Europeo", stops:[
-      {t:"13:00–14:00", ti:"Parlamento Europeo — visita al Hemiciclo", kind:"reserved", d:["Visita reservada a las 13:00. Llevad el DNI/pasaporte."], url:pt(P.parlamento), wiki:["Parlamento_Europeo","European_Parliament"]},
-      {t:"14:00–14:20", ti:"Muro de Berlín (tramo conservado)", d:["Fragmento original, pocos minutos de la salida del Parlamento."], url:pt(P.muro_berlin), wiki:[null,"Berlin_Wall"]},
-      {t:"14:20–14:45", ti:"Berlaymont + Parque Leopold", d:["Sede de la Comisión Europea por fuera, y paseo tranquilo por el parque."], url:pt(P.berlaymont), wiki:["Edificio_Berlaymont","Berlaymont_building"]},
+      {t:"13:00–14:00", ti:"Parlamento Europeo — visita al Hemiciclo", kind:"reserved", d:["Visita reservada a las 13:00. Llevad el DNI/pasaporte."], url:pt(P.parlamento), wiki:["Parlamento_Europeo","European_Parliament"], img:"img/parlamento.jpg"},
+      {t:"14:00–14:20", ti:"Muro de Berlín (tramo conservado)", d:["Fragmento original, pocos minutos de la salida del Parlamento."], url:pt(P.muro_berlin), wiki:[null,"Berlin_Wall"], img:"img/muro_berlin.jpg"},
+      {t:"14:20–14:45", ti:"Berlaymont + Parque Leopold", d:["Sede de la Comisión Europea por fuera, y paseo tranquilo por el parque."], url:pt(P.berlaymont), wiki:["Edificio_Berlaymont","Berlaymont_building"], img:"img/berlaymont.jpg"},
     ]},
     {name:"Tarde", stops:[
       {t:"15:00–15:35", ti:"Caminar de vuelta a Grand Place", d:["32 min a pie por Rue Belliard, cruzando el Parque de Bruselas."], url:dir([P.parc_leopold,P.grandplace],"walking")},
-      {t:"15:35–16:45", ti:"Tiempo libre cerca de Grand Place", d:["Pausa con calma en una terraza antes del free tour."]},
+      {t:"15:35–16:45", ti:"Tiempo libre cerca de Grand Place", d:["Pausa con calma en una terraza antes del free tour."], wiki:["Grand-Place","Grand-Place"], img:"img/grandplace.jpg"},
     ]},
     {name:"Atardecer — Free Tour", stops:[
-      {t:"17:00–19:00", ti:"Free Tour por Bruselas", kind:"reserved", d:["Punto de encuentro: Grand Place, frente al Ayuntamiento. 2h.","Recorrido: Grand Place → Manneken Pis → Bolsa (Beer World) → murales de cómic → Sablon → Palacio de Justicia → Plaza Real → Catedral → Mont des Arts.","Estas paradas ya quedan cubiertas por el guía."], url:pt(P.grandplace), wiki:["Grand-Place","Grand-Place"]},
+      {t:"17:00–19:00", ti:"Free Tour por Bruselas", kind:"reserved", d:["Punto de encuentro: Grand Place, frente al Ayuntamiento. 2h.","Recorrido: Grand Place → Manneken Pis → Bolsa (Beer World) → murales de cómic → Sablon → Palacio de Justicia → Plaza Real → Catedral → Mont des Arts.","Estas paradas ya quedan cubiertas por el guía."], url:pt(P.grandplace), wiki:["Grand-Place","Grand-Place"], img:"img/grandplace.jpg"},
     ]},
     {name:"Noche", stops:[
-      {t:"19:15", ti:"Barrio de Saint-Géry + Zinneke Pis", d:["Antiguas Halles, y la escultura del perrito (3ª estatua \"pis\")."], url:pt(P.saint_gery), wiki:["Halles_de_Saint-Géry","Sint-Gorikshallen"]},
-      {t:"19:35", ti:"Sainte-Catherine + Mercado del Pescado", d:["Antiguo puerto, zona de marisquerías y terrazas."], url:pt(P.ste_catherine), wiki:[null,"Sainte-Catherine/Sint-Katelijne"]},
-      {t:"20:15", ti:"Cena + Delirium Café + Jeanneke Pis", d:["Delirium Café (+2000 cervezas) y la versión femenina del Manneken Pis enfrente."], url:pt(P.delirium), wiki:["Jeanneke_Pis","Jeanneke_Pis"]},
+      {t:"19:15", ti:"Barrio de Saint-Géry + Zinneke Pis", d:["Antiguas Halles, y la escultura del perrito (3ª estatua \"pis\")."], url:pt(P.saint_gery), wiki:[null,"Halles_Saint-Géry"], img:"img/saint_gery.jpg"},
+      {t:"19:35", ti:"Sainte-Catherine + Mercado del Pescado", d:["Antiguo puerto, zona de marisquerías y terrazas."], url:pt(P.ste_catherine), wiki:[null,"Place_Sainte-Catherine"], img:"img/ste_catherine.jpg"},
+      {t:"20:15", ti:"Cena + Delirium Café + Jeanneke Pis", d:["Delirium Café (+2000 cervezas) y la versión femenina del Manneken Pis enfrente."], url:pt(P.delirium), wiki:["Jeanneke_Pis","Jeanneke_Pis"], img:"img/delirium.jpg"},
       {t:"≈21:45", ti:"Vuelta al hotel caminando", d:["20-25 min a pie por Avenue Louise, de noche."], url:dir([P.grandplace,P.hotel],"walking")},
     ]},
   ],
@@ -392,12 +392,12 @@ const DAYS = [
       {t:"08:00", ti:"Caminar hacia Bruxelles-Midi", d:["18-20 min a pie desde el hotel."], url:dir([P.hotel,P.midi],"walking")},
       {t:"≈08:30", ti:"Tren directo a Brujas", kind:"metro", d:["~1h. Trenes IC frecuentes desde Bruxelles-Midi/Central/Nord.","Billete: 'Standard Ticket' Bruxelles → Brugge en la app/web SNCB-NMBS (belgiantrain.be). No hay que reservar asiento ni coger un tren concreto: vale para cualquiera dentro de su validez.","Al comprarlo con la cuenta de ella (24), con su fecha de nacimiento puesta, se aplica solo el 40% Youth -26. Él (26) lo compra a tarifa normal."]},
       {t:"≈09:30", ti:"Llegada a Brujas — caminar al centro", d:["10 min a pie hasta el Lago del Amor."], url:dir([P.brugge_station,P.brugge_minnewater],"walking")},
-      {t:"09:40–10:00", ti:"Lago del Amor (Minnewater) + Begijnhof", d:["Paseo romántico y recinto de casitas blancas — gratis."], url:pt(P.brugge_minnewater), wiki:["Beaterio_de_Brujas","Bruges_Beguinage"]},
-      {t:"10:10–10:30", ti:"Iglesia N. Señora + Puente Bonifacio", d:["Entrada libre al templo. Puente Bonifacio: rincón escondido, ideal para foto."], url:pt(P.brugge_onzelievevrouw), wiki:["Iglesia_de_Nuestra_Señora_(Brujas)","Church_of_Our_Lady,_Bruges"]},
-      {t:"10:40–11:10", ti:"Burg + Basílica de la Santa Sangre", d:["Ayuntamiento gótico y capilla baja gratuita."], url:pt(P.brugge_burg), wiki:["Basílica_de_la_Santa_Sangre","Basilica_of_the_Holy_Blood"]},
-      {t:"11:12", ti:"Vismarkt", d:["Antiguo mercado del pescado, 1 min del Burg."], url:pt(P.brugge_vismarkt)},
-      {t:"11:15", ti:"Rozenhoedkaai", d:["El rincón más fotografiado de Brujas."], url:pt(P.brugge_rozenhoedkaai), wiki:[null,"Rozenhoedkaai"]},
-      {t:"11:25–13:00", ti:"Markt + Belfort + chocolaterías", d:["Belfort: subida de pago opcional (~360 escalones).","The Chocolate Line, Chocolatier Dumon, The Old Chocolate House.","Opcional: paseo en barco (~30-45 min, de pago)."], url:pt(P.brugge_markt), wiki:["Campanario_de_Brujas","Belfry_of_Bruges"]},
+      {t:"09:40–10:00", ti:"Lago del Amor (Minnewater) + Begijnhof", d:["Paseo romántico y recinto de casitas blancas — gratis."], url:pt(P.brugge_minnewater), wiki:[null,"Princely_Beguinage_Ten_Wijngaerde,_Bruges"], img:"img/brugge_minnewater.jpg"},
+      {t:"10:10–10:30", ti:"Iglesia N. Señora + Puente Bonifacio", d:["Entrada libre al templo. Puente Bonifacio: rincón escondido, ideal para foto."], url:pt(P.brugge_onzelievevrouw), wiki:["Iglesia_de_Nuestra_Señora_(Brujas)","Church_of_Our_Lady,_Bruges"], img:"img/brugge_onzelievevrouw.jpg"},
+      {t:"10:40–11:10", ti:"Burg + Basílica de la Santa Sangre", d:["Ayuntamiento gótico y capilla baja gratuita."], url:pt(P.brugge_burg), wiki:["Basílica_de_la_Santa_Sangre","Basilica_of_the_Holy_Blood"], img:"img/brugge_burg.jpg"},
+      {t:"11:12", ti:"Vismarkt", d:["Antiguo mercado del pescado, 1 min del Burg."], url:pt(P.brugge_vismarkt), wiki:[null,"Rozenhoedkaai"], img:"img/brugge_rozenhoedkaai.jpg"},
+      {t:"11:15", ti:"Rozenhoedkaai", d:["El rincón más fotografiado de Brujas."], url:pt(P.brugge_rozenhoedkaai), wiki:[null,"Rozenhoedkaai"], img:"img/brugge_rozenhoedkaai.jpg"},
+      {t:"11:25–13:00", ti:"Markt + Belfort + chocolaterías", d:["Belfort: subida de pago opcional (~360 escalones).","The Chocolate Line, Chocolatier Dumon, The Old Chocolate House.","Opcional: paseo en barco (~30-45 min, de pago)."], url:pt(P.brugge_markt), wiki:["Campanario_de_Brujas","Belfry_of_Bruges"], img:"img/brugge_markt.jpg"},
     ]},
     {name:"Mediodía", stops:[
       {t:"13:00–14:00", ti:"Comida en Brujas", d:["Zona del Markt, algo más allá de la plaza."]},
@@ -406,11 +406,11 @@ const DAYS = [
     ]},
     {name:"Tarde", stops:[
       {t:"≈15:00", ti:"Llegada a Gante — Puente de San Miguel", d:["20 min a pie desde Gent-Sint-Pieters."], url:dir([P.gent_station,P.gent_michielsbrug],"walking")},
-      {t:"15:20", ti:"Puente de San Miguel", d:["EL mirador de Gante: las \"tres torres\" y Graslei/Korenlei a la vez."], url:pt(P.gent_michielsbrug), wiki:[null,"Sint-Michielsbrug"]},
-      {t:"15:30–16:15", ti:"Graslei y Korenlei + Groentenmarkt", d:["El muelle más fotogénico de Bélgica — gratis."], url:pt(P.gent_graslei), wiki:["Graslei","Graslei"]},
-      {t:"16:20–17:15", ti:"Gravensteen + Patershol", d:["Castillo imponente por fuera; barrio medieval detrás."], url:pt(P.gent_gravensteen), wiki:["Castillo_de_los_Condes_de_Flandes","Gravensteen"]},
-      {t:"17:20", ti:"Vrijdagmarkt + Dulle Griet", d:["Plaza histórica y cañón medieval — 5 min de desvío."], url:pt(P.gent_vrijdagmarkt), wiki:[null,"Dulle_Griet"]},
-      {t:"17:30–18:30", ti:"Las tres torres: San Nicolás, Belfort, San Bavón", d:["En fila hacia el centro. San Bavón: templo gratis, Retablo de pago aparte."], url:pt(P.gent_stbavo), wiki:["Catedral_de_San_Bavón","St_Bavo's_Cathedral,_Ghent"]},
+      {t:"15:20", ti:"Puente de San Miguel", d:["EL mirador de Gante: las \"tres torres\" y Graslei/Korenlei a la vez."], url:pt(P.gent_michielsbrug), img:"img/gent_michielsbrug.jpg"},
+      {t:"15:30–16:15", ti:"Graslei y Korenlei + Groentenmarkt", d:["El muelle más fotogénico de Bélgica — gratis."], url:pt(P.gent_graslei), wiki:["Graslei","Graslei"], img:"img/gent_graslei.jpg"},
+      {t:"16:20–17:15", ti:"Gravensteen + Patershol", d:["Castillo imponente por fuera; barrio medieval detrás."], url:pt(P.gent_gravensteen), wiki:["Castillo_de_los_Condes_de_Flandes","Gravensteen"], img:"img/gent_gravensteen.jpg"},
+      {t:"17:20", ti:"Vrijdagmarkt + Dulle Griet", d:["Plaza histórica y cañón medieval — 5 min de desvío."], url:pt(P.gent_vrijdagmarkt), wiki:[null,"Dulle_Griet"], img:"img/gent_vrijdagmarkt.jpg"},
+      {t:"17:30–18:30", ti:"Las tres torres: San Nicolás, Belfort, San Bavón", d:["En fila hacia el centro. San Bavón: templo gratis, Retablo de pago aparte."], url:pt(P.gent_stbavo), wiki:["Catedral_de_San_Bavón","St_Bavo's_Cathedral,_Ghent"], img:"img/gent_stbavo.jpg"},
     ]},
     {name:"Noche", stops:[
       {t:"18:30–19:30", ti:"Cena en Gante", d:["Zona de Graslei/Patershol, buen ambiente."]},
@@ -427,15 +427,15 @@ const DAYS = [
     {name:"Mañana", stops:[
       {t:"≈07:30", ti:"Hacia el punto de encuentro", d:["Carrefour de l'Europe: 20 min a pie."], url:dir([P.hotel,P.carrefoureuropa],"walking")},
       {t:"08:00", ti:"Salida en autobús hacia Ámsterdam", kind:"reserved", d:["~3h30 cruzando la frontera con Holanda."], url:pt(P.carrefoureuropa)},
-      {t:"≈11:30", ti:"Llegada + paseo en barco (1h)", kind:"reserved", d:["Canales Herengracht, Keizersgracht, Prinsengracht, Jordaan, Ana Frank."], wiki:["Canales_de_Ámsterdam","Canals_of_Amsterdam"]},
+      {t:"≈11:30", ti:"Llegada + paseo en barco (1h)", kind:"reserved", d:["Canales Herengracht, Keizersgracht, Prinsengracht, Jordaan, Ana Frank."], wiki:["Canales_de_Ámsterdam","Canals_of_Amsterdam"], img:"img/ams_canales.jpg"},
     ]},
     {name:"Tarde", stops:[
       {t:"≈12:30–16:00", ti:"Tiempo libre en Ámsterdam (3h30)", free:true, d:["Rijksmuseum/Ana Frank requieren entrada anticipada — reservad antes de salir de Bruselas si os interesa."],
         subs:[
-          {ti:"Plaza Dam", url:pt(P.ams_dam), wiki:["Plaza_Dam","Dam_Square"]},
-          {ti:"Barrio Rojo (De Wallen)", url:pt(P.ams_wallen), wiki:["De_Wallen","De_Wallen"]},
-          {ti:"Nieuwmarkt", url:pt(P.ams_nieuwmarkt), wiki:["Nieuwmarkt","Nieuwmarkt,_Amsterdam"]},
-          {ti:"Nueve Calles (De Negen Straatjes)", url:pt(P.ams_negenstraatjes), wiki:["De_Negen_Straatjes","Nine_Streets"]},
+          {ti:"Plaza Dam", url:pt(P.ams_dam), wiki:["Plaza_Dam","Dam_Square"], img:"img/ams_dam.jpg"},
+          {ti:"Barrio Rojo (De Wallen)", url:pt(P.ams_wallen), wiki:["De_Wallen","De_Wallen"], img:"img/ams_wallen.jpg"},
+          {ti:"Nieuwmarkt", url:pt(P.ams_nieuwmarkt), wiki:["Nieuwmarkt","Nieuwmarkt,_Amsterdam"], img:"img/ams_nieuwmarkt.jpg"},
+          {ti:"Nueve Calles (De Negen Straatjes)", url:pt(P.ams_negenstraatjes), wiki:[null,"Negen_Straatjes"], img:"img/ams_negenstraatjes.jpg"},
         ]},
       {t:"por la tarde", ti:"Regreso en autobús a Bruselas", d:["~3h30. Excursión de ~12h en total desde las 8:00."]},
     ]},
@@ -452,25 +452,25 @@ const DAYS = [
   sections:[
     {name:"Mañana", stops:[
       {t:"≈07:30", ti:"Hacia el punto de encuentro", d:["Carrefour de l'Europe: 20 min a pie."], url:dir([P.hotel,P.carrefoureuropa],"walking")},
-      {t:"08:00", ti:"Autobús hacia Dinant", kind:"reserved", d:["Colegiata de Notre-Dame, Casa de Adolphe Sax, Maison Leffe."], url:pt(P.carrefoureuropa), wiki:["Dinant","Dinant"]},
+      {t:"08:00", ti:"Autobús hacia Dinant", kind:"reserved", d:["Colegiata de Notre-Dame, Casa de Adolphe Sax, Maison Leffe."], url:pt(P.carrefoureuropa), wiki:["Dinant","Dinant"], img:"img/dinant_town.jpg"},
       {t:"≈10:30–11:30", ti:"Tiempo libre en Dinant", free:true, d:["El guía ya señala la colegiata y la Casa de Adolphe Sax desde el bus — con este rato podéis acercaros por vuestra cuenta."],
         subs:[
-          {ti:"Ciudadela de Dinant (mirador + teleférico, de pago)", url:pt(P.dinant_ciudadela), wiki:["Ciudadela_de_Dinant","Citadel_of_Dinant"]},
-          {ti:"Paseo junto al río Mosa", url:pt(P.dinant_mosa), wiki:[null,"Meuse"]},
-          {ti:"Casa de Adolphe Sax (exterior)", url:pt(P.dinant_sax), wiki:["Adolphe_Sax","Adolphe_Sax"]},
+          {ti:"Ciudadela de Dinant (mirador + teleférico, de pago)", url:pt(P.dinant_ciudadela), wiki:["Ciudadela_de_Dinant","Citadel_of_Dinant"], img:"img/dinant_ciudadela.jpg"},
+          {ti:"Paseo junto al río Mosa", url:pt(P.dinant_mosa), wiki:[null,"Meuse"], img:"img/dinant_mosa.jpg"},
+          {ti:"Casa de Adolphe Sax (exterior)", url:pt(P.dinant_sax), wiki:["Adolphe_Sax","Adolphe_Sax"], img:"img/dinant_sax.jpg"},
         ]},
     ]},
     {name:"Mediodía", stops:[
       {t:"≈11:30", ti:"Autobús hacia Luxemburgo", d:["Cruzando la frontera del Gran Ducado."]},
-      {t:"≈13:00", ti:"Tour a pie por Luxemburgo", kind:"reserved", d:["Palacio Ducal, Hôtel de Ville, catedral de Notre-Dame."], wiki:["Palacio_Gran_Ducal_de_Luxemburgo","Grand_Ducal_Palace,_Luxembourg"]},
+      {t:"≈13:00", ti:"Tour a pie por Luxemburgo", kind:"reserved", d:["Palacio Ducal, Hôtel de Ville, catedral de Notre-Dame."], wiki:["Palacio_Gran_Ducal_de_Luxemburgo","Grand_Ducal_Palace,_Luxembourg"], img:"img/lux_palace.jpg"},
     ]},
     {name:"Tarde", stops:[
       {t:"≈14:00–16:30", ti:"Tiempo libre en Luxemburgo", free:true, d:["El tour a pie ya cubre el Palacio Ducal, Hôtel de Ville y la catedral — este rato es para explorar los miradores y el Grund."],
         subs:[
-          {ti:"Chemin de la Corniche (\"el balcón más bonito de Europa\")", url:pt(P.lux_corniche), wiki:["Chemin_de_la_Corniche_(Luxemburgo)","Chemin_de_la_Corniche"]},
-          {ti:"Casemates du Bock (fortificaciones, exterior gratis)", url:pt(P.lux_bock), wiki:["Casamatas_del_Bock","Bock_Casemates"]},
-          {ti:"Barrio del Grund (junto al río Alzette)", url:pt(P.lux_grund), wiki:["Grund","Grund"]},
-          {ti:"Place d'Armes (centro, terrazas)", url:pt(P.lux_placedarmes), wiki:["Place_d'Armes_(Luxemburgo)","Place_d'Armes,_Luxembourg_City"]},
+          {ti:"Chemin de la Corniche (\"el balcón más bonito de Europa\")", url:pt(P.lux_corniche), img:"img/lux_corniche.jpg"},
+          {ti:"Casemates du Bock (fortificaciones, exterior gratis)", url:pt(P.lux_bock), wiki:[null,"Bock_(Luxembourg)"], img:"img/lux_bock.jpg"},
+          {ti:"Barrio del Grund (junto al río Alzette)", url:pt(P.lux_grund), img:"img/lux_grund.jpg"},
+          {ti:"Place d'Armes (centro, terrazas)", url:pt(P.lux_placedarmes), wiki:[null,"Place_d'Armes_(Luxembourg)"], img:"img/lux_placedarmes.jpg"},
         ]},
       {t:"≈16:30", ti:"Regreso en autobús a Bruselas", d:["Excursión completa: 11h30-12h."]},
     ]},
@@ -488,15 +488,15 @@ const DAYS = [
     {name:"Mañana", stops:[
       {t:"07:15", ti:"Desayuno y maletas en consigna", url:pt(P.hotel)},
       {t:"07:30", ti:"Metro hacia Simonis", kind:"metro", d:["Línea 2 desde Louise (~20 min)."], url:dir([P.hotel,P.koekelberg],"transit")},
-      {t:"07:50–08:20", ti:"Basílica del Sagrado Corazón", d:["5ª iglesia más grande del mundo. Templo gratis; cúpula/terraza de pago."], url:pt(P.koekelberg), wiki:["Basílica_del_Sagrado_Corazón_(Bruselas)","National_Basilica_of_the_Sacred_Heart"]},
+      {t:"07:50–08:20", ti:"Basílica del Sagrado Corazón", d:["5ª iglesia más grande del mundo. Templo gratis; cúpula/terraza de pago."], url:pt(P.koekelberg), wiki:["Basílica_del_Sagrado_Corazón_(Bruselas)","National_Basilica_of_the_Sacred_Heart"], img:"img/koekelberg.jpg"},
       {t:"08:30", ti:"Metro (línea 6) hacia Heysel", kind:"metro", d:["~15 min, sin cambios."], url:dir([P.koekelberg,P.atomium],"transit")},
-      {t:"08:45–09:25", ti:"Atomium (vista exterior)", d:["Impresiona igual desde el parque de alrededor."], url:pt(P.atomium), wiki:["Atomium","Atomium"]},
+      {t:"08:45–09:25", ti:"Atomium (vista exterior)", d:["Impresiona igual desde el parque de alrededor."], url:pt(P.atomium), wiki:["Atomium","Atomium"], img:"img/atomium.jpg"},
       {t:"09:40", ti:"Metro/tranvía hacia el Cincuentenario", kind:"metro", d:["~35-40 min con transbordo."], url:dir([P.atomium,P.cinquantenaire],"transit")},
-      {t:"10:20–10:45", ti:"Cincuentenario + Arco del Triunfo", d:["Entrada libre. Mirador gratuito en el Museo de Historia Militar."], url:pt(P.cinquantenaire), wiki:["Parque_del_Cincuentenario","Parc_du_Cinquantenaire"]},
+      {t:"10:20–10:45", ti:"Cincuentenario + Arco del Triunfo", d:["Entrada libre. Mirador gratuito en el Museo de Historia Militar."], url:pt(P.cinquantenaire), wiki:["Parque_del_Cincuentenario","Parc_du_Cinquantenaire"], img:"img/cinquantenaire.jpg"},
       {t:"11:00", ti:"Metro/tranvía hacia Puerta de Halle", kind:"metro", d:["~30-35 min con transbordo."], url:dir([P.cinquantenaire,P.porte_hal],"transit")},
-      {t:"11:35–12:00", ti:"Puerta de Halle", d:["Última puerta de la muralla medieval. Museo interior de pago."], url:pt(P.porte_hal), wiki:["Puerta_de_Halle","Halle_Gate"]},
-      {t:"12:10–12:55", ti:"Mercadillo de las Marolles", d:["Antigüedades al aire libre, hasta las 14:00. Solo efectivo."], url:pt(P.marolles), wiki:["Marolles_(Bruselas)","Marolles/Marollen"]},
-      {t:"13:05–13:30", ti:"Grand Sablon + Petit Sablon", d:["Chocolaterías, anticuarios y jardín con 48 estatuas de bronce."], url:pt(P.sablon), wiki:[null,"Sablon/Zavel"]},
+      {t:"11:35–12:00", ti:"Puerta de Halle", d:["Última puerta de la muralla medieval. Museo interior de pago."], url:pt(P.porte_hal), wiki:["Puerta_de_Halle","Halle_Gate"], img:"img/porte_hal.jpg"},
+      {t:"12:10–12:55", ti:"Mercadillo de las Marolles", d:["Antigüedades al aire libre, hasta las 14:00. Solo efectivo."], url:pt(P.marolles), wiki:[null,"Place_du_Jeu_de_Balle"], img:"img/marolles.jpg"},
+      {t:"13:05–13:30", ti:"Grand Sablon + Petit Sablon", d:["Chocolaterías, anticuarios y jardín con 48 estatuas de bronce."], url:pt(P.sablon), wiki:[null,"Sablon,_Brussels"], img:"img/sablon.jpg"},
     ]},
     {name:"Mediodía — Traslado al aeropuerto", stops:[
       {t:"13:30", ti:"Caminar al hotel", d:["12-15 min a pie desde Sablon."], url:dir([P.sablon,P.hotel],"walking")},
@@ -630,7 +630,7 @@ function persistWikiCache(){
     localStorage.setItem(WIKI_LS_KEY, JSON.stringify(wikiCache));
   }catch(e){ /* storage full or unavailable — ignore, in-memory cache still works this session */ }
 }
-const LOGISTICS_RE = /^(Caminar|Metro|Tren |Autobús|Check-in|Comida r[aá]pida|Desayuno|Aterrizaje|Recoger maletas|Vuelta al hotel|Salida del hotel|Salida en autob|Regreso en autob|Traslado al hotel|Autobús hacia)/i;
+const LOGISTICS_RE = /^(Caminar|Metro|Tren |Autobús|Check-in|Comida|Cena|Desayuno|Aterrizaje|Aeropuerto|Hacia|Llegada|Recoger maletas|Vuelta al hotel|Salida del hotel|Salida en autob|Regreso en autob|Traslado al hotel)/i;
 function isLogistics(s){ return LOGISTICS_RE.test(s.ti) && !s.wiki; }
 
 let lastFetchHadNetworkError = false;
@@ -688,9 +688,16 @@ async function openInfo(idx){
   const s = STOP_REGISTRY[idx];
   if(!s) return;
   elModalBackdrop.classList.add("open");
-  elModalPhoto.innerHTML = s.wiki
-    ? `<div class="ph-spinner"><span></span></div>`
-    : `<div class="ph-fallback"><span class="letter">${(s.ti||"?").charAt(0)}</span></div>`;
+  // The photo is bundled locally (img/) so it shows instantly and works
+  // offline — it no longer depends on a live Wikipedia fetch. That fetch is
+  // now only used as a bonus for the descriptive text, when there's signal.
+  if(s.img){
+    elModalPhoto.innerHTML = `<img src="${s.img}" alt="" onerror="this.parentElement.innerHTML='<div class=&quot;ph-fallback&quot;><span class=&quot;letter&quot;>${(s.ti||"?").charAt(0)}</span></div>'">`;
+  } else if(s.wiki){
+    elModalPhoto.innerHTML = `<div class="ph-spinner"><span></span></div>`;
+  } else {
+    elModalPhoto.innerHTML = `<div class="ph-fallback"><span class="letter">${(s.ti||"?").charAt(0)}</span></div>`;
+  }
   const descHtml = (s.d && s.d.length) ? `<div class="modal-desc">${s.d.map(l=>`<p>${l}</p>`).join("")}</div>` : "";
   const mapHtml = s.url ? `<a class="maplink" href="${s.url}" target="_blank" rel="noopener">${svgPin()} Ver en Google Maps</a>` : "";
   elModalScroll.innerHTML = `<h3>${s.ti}</h3><div id="modalWikiSlot"></div>${descHtml}${mapHtml}`;
@@ -701,13 +708,15 @@ async function openInfo(idx){
     // Only apply if this stop is still the one open (avoid race if user taps another fast)
     if(!elModalBackdrop.classList.contains("open")) return;
     if(data){
-      const img = data.thumbnail && data.thumbnail.source;
-      elModalPhoto.innerHTML = img
-        ? `<img src="${img.replace(/\/\d+px-/, "/500px-")}" alt="">`
-        : `<div class="ph-fallback"><span class="letter">${(s.ti||"?").charAt(0)}</span></div>`;
+      if(!s.img){
+        const img = data.thumbnail && data.thumbnail.source;
+        elModalPhoto.innerHTML = img
+          ? `<img src="${img.replace(/\/\d+px-/, "/500px-")}" alt="">`
+          : `<div class="ph-fallback"><span class="letter">${(s.ti||"?").charAt(0)}</span></div>`;
+      }
       const slot = document.getElementById("modalWikiSlot");
       if(slot) slot.innerHTML = `<div class="modal-wiki">${data.extract}<span class="src">Fuente: Wikipedia</span></div>`;
-    } else {
+    } else if(!s.img){
       const msg = lastFetchHadNetworkError
         ? "No se pudo conectar a internet para cargar la foto."
         : "No hay foto disponible para este sitio.";
@@ -716,6 +725,8 @@ async function openInfo(idx){
         <span class="retry-msg">${msg}${lastFetchHadNetworkError ? ' <u class="retry-link" data-retry-idx="'+idx+'">Reintentar</u>' : ''}</span>
       </div>`;
     }
+    // If s.img is set and the wiki fetch simply failed (offline), we already
+    // have a real photo on screen — no need to show a "no photo" fallback.
   }
 }
 

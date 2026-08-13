@@ -2,7 +2,7 @@
 // Strategy: stale-while-revalidate on same-origin GET requests only —
 // Wikipedia photo lookups and Google Maps links always go straight to the
 // network (or fail silently offline; the app already handles that).
-const CACHE = "bru26-v1";
+const CACHE = "bru26-v2";
 const CORE_ASSETS = [
   "./",
   "./index.html",
@@ -13,6 +13,47 @@ const CORE_ASSETS = [
   "./apple-touch-icon.png",
   "./icon-192.png",
   "./icon-512.png",
+  // Place photos — precached on install so every stop's photo works
+  // offline from the very first launch, without needing to open each one.
+  "img/ams_canales.jpg",
+  "img/ams_dam.jpg",
+  "img/ams_negenstraatjes.jpg",
+  "img/ams_nieuwmarkt.jpg",
+  "img/ams_wallen.jpg",
+  "img/atomium.jpg",
+  "img/berlaymont.jpg",
+  "img/brugge_burg.jpg",
+  "img/brugge_markt.jpg",
+  "img/brugge_minnewater.jpg",
+  "img/brugge_onzelievevrouw.jpg",
+  "img/brugge_rozenhoedkaai.jpg",
+  "img/cinquantenaire.jpg",
+  "img/delirium.jpg",
+  "img/dinant_ciudadela.jpg",
+  "img/dinant_mosa.jpg",
+  "img/dinant_sax.jpg",
+  "img/dinant_town.jpg",
+  "img/gent_graslei.jpg",
+  "img/gent_gravensteen.jpg",
+  "img/gent_michielsbrug.jpg",
+  "img/gent_stbavo.jpg",
+  "img/gent_vrijdagmarkt.jpg",
+  "img/grandplace.jpg",
+  "img/koekelberg.jpg",
+  "img/lux_bock.jpg",
+  "img/lux_corniche.jpg",
+  "img/lux_grund.jpg",
+  "img/lux_palace.jpg",
+  "img/lux_placedarmes.jpg",
+  "img/marolles.jpg",
+  "img/muro_berlin.jpg",
+  "img/parlamento.jpg",
+  "img/porte_hal.jpg",
+  "img/rueneuve.jpg",
+  "img/sablon.jpg",
+  "img/saint_gery.jpg",
+  "img/saint_hubert.jpg",
+  "img/ste_catherine.jpg",
 ];
 
 self.addEventListener("install", (event) => {
