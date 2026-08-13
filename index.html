@@ -390,7 +390,7 @@ const DAYS = [
   sections:[
     {name:"Mañana", stops:[
       {t:"08:00", ti:"Caminar hacia Bruxelles-Midi", d:["18-20 min a pie desde el hotel."], url:dir([P.hotel,P.midi],"walking")},
-      {t:"≈08:30", ti:"Tren directo a Brujas", kind:"metro", d:["~1h. Trenes IC frecuentes desde Bruxelles-Midi/Central/Nord."]},
+      {t:"≈08:30", ti:"Tren directo a Brujas", kind:"metro", d:["~1h. Trenes IC frecuentes desde Bruxelles-Midi/Central/Nord.","Billete: 'Standard Ticket' Bruxelles → Brugge en la app/web SNCB-NMBS (belgiantrain.be). No hay que reservar asiento ni coger un tren concreto: vale para cualquiera dentro de su validez.","Al comprarlo con la cuenta de ella (24), con su fecha de nacimiento puesta, se aplica solo el 40% Youth -26. Él (26) lo compra a tarifa normal."]},
       {t:"≈09:30", ti:"Llegada a Brujas — caminar al centro", d:["10 min a pie hasta el Lago del Amor."], url:dir([P.brugge_station,P.brugge_minnewater],"walking")},
       {t:"09:40–10:00", ti:"Lago del Amor (Minnewater) + Begijnhof", d:["Paseo romántico y recinto de casitas blancas — gratis."], url:pt(P.brugge_minnewater), wiki:["Beaterio_de_Brujas","Bruges_Beguinage"]},
       {t:"10:10–10:30", ti:"Iglesia N. Señora + Puente Bonifacio", d:["Entrada libre al templo. Puente Bonifacio: rincón escondido, ideal para foto."], url:pt(P.brugge_onzelievevrouw), wiki:["Iglesia_de_Nuestra_Señora_(Brujas)","Church_of_Our_Lady,_Bruges"]},
@@ -402,7 +402,7 @@ const DAYS = [
     {name:"Mediodía", stops:[
       {t:"13:00–14:00", ti:"Comida en Brujas", d:["Zona del Markt, algo más allá de la plaza."]},
       {t:"≈14:15", ti:"Caminar a la estación de Brujas", d:["15-20 min a pie."], url:dir([P.brugge_markt,P.brugge_station],"walking")},
-      {t:"≈14:30", ti:"Tren Brujas → Gante", kind:"metro", d:["~25-30 min, trenes frecuentes."]},
+      {t:"≈14:30", ti:"Tren Brujas → Gante", kind:"metro", d:["~25-30 min, trenes frecuentes.","Billete: 'Standard Ticket' Brugge → Gent-Sint-Pieters — otro billete distinto al del primer tramo, mismo descuento Youth -26 para ella."]},
     ]},
     {name:"Tarde", stops:[
       {t:"≈15:00", ti:"Llegada a Gante — Puente de San Miguel", d:["20 min a pie desde Gent-Sint-Pieters."], url:dir([P.gent_station,P.gent_michielsbrug],"walking")},
@@ -414,7 +414,7 @@ const DAYS = [
     ]},
     {name:"Noche", stops:[
       {t:"18:30–19:30", ti:"Cena en Gante", d:["Zona de Graslei/Patershol, buen ambiente."]},
-      {t:"≈19:45", ti:"Tren Gante → Bruselas", kind:"metro", d:["Directo, ~35-40 min a Bruxelles-Midi/Central."]},
+      {t:"≈19:45", ti:"Tren Gante → Bruselas", kind:"metro", d:["Directo, ~35-40 min a Bruxelles-Midi/Central.","Billete: 'Standard Ticket' Gent-Sint-Pieters → Bruxelles, el tercer y último billete del día — mismo sistema que los anteriores."]},
       {t:"≈20:45", ti:"Caminar al hotel", d:["18-20 min a pie desde Bruxelles-Midi."], url:dir([P.midi,P.hotel],"walking")},
     ]},
   ],
