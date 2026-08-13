@@ -147,6 +147,7 @@
   .info-block h3{ font-family:Georgia, serif; font-size:16px; color:var(--burgundy-deep); margin:0 0 8px; border-bottom:1px solid var(--gold-soft); padding-bottom:6px;}
   .info-row{ font-size:13.5px; line-height:1.6; margin-bottom:8px; color:#3a2f26;}
   .info-row b{ color:var(--burgundy-text);}
+  .tip-link{ display:inline-block; margin-left:4px; font-weight:800; color:var(--burgundy-text); text-decoration:underline; white-space:nowrap;}
 
   /* ---------- TAB BAR ---------- */
   .tabbar{
@@ -502,12 +503,12 @@ const INFO = {
     ["Brujas y Gante","Miércoles 19 · por libre en tren, sin excursión"],
   ],
   tips:[
-    "Transporte público: STIB-MIVB (metro/tranvía/bus). App con horarios en tiempo real; pago sin contacto en validadores.",
-    "Trenes a Brujas/Gante: app/web SNCB-NMBS (belgiantrain.be). Ella (24) tiene 40% de descuento \"Youth -26\"; él (26) tarifa normal.",
-    "Flibco (Bruxelles-Midi ↔ Charleroi): comprad el billete con antelación en la app/web — siempre más barato que en el momento.",
-    "Free tour y excursiones: llevad el bono electrónico y llegad 10 min antes.",
-    "Efectivo útil para el mercadillo de las Marolles (solo cash).",
-    "Calzado cómodo: cada zona se recorre bastante a pie.",
+    {text:"Transporte público: STIB-MIVB (metro/tranvía/bus). App con horarios en tiempo real; pago sin contacto en validadores.", url:"https://www.stib-mivb.be", label:"Abrir STIB-MIVB"},
+    {text:"Trenes a Brujas/Gante: app/web SNCB-NMBS (belgiantrain.be). Ella (24) tiene 40% de descuento \"Youth -26\"; él (26) tarifa normal.", url:"https://www.belgiantrain.be", label:"Abrir SNCB-NMBS"},
+    {text:"Flibco (Bruxelles-Midi ↔ Charleroi): comprad el billete con antelación en la app/web — siempre más barato que en el momento.", url:"https://www.flibco.com", label:"Abrir Flibco"},
+    {text:"Free tour y excursiones: llevad el bono electrónico y llegad 10 min antes."},
+    {text:"Efectivo útil para el mercadillo de las Marolles (solo cash)."},
+    {text:"Calzado cómodo: cada zona se recorre bastante a pie."},
   ],
 };
 
@@ -799,7 +800,10 @@ function renderInfo(){
     INFO.hotel.map(l=>`<div class="info-row">${l}</div>`).join("") + `</div>`;
   html += `<div class="info-block"><h3>Reservas</h3>` +
     INFO.reservas.map(r=>`<div class="info-row"><b>${r[0]}:</b> ${r[1]}</div>`).join("") + `</div>`;
-  html += `<div class="notebox">${INFO.tips.map(t=>`<p>${t}</p>`).join("")}</div>`;
+  html += `<div class="notebox">${INFO.tips.map(t=>{
+    const link = t.url ? ` <a class="tip-link" href="${t.url}" target="_blank" rel="noopener">${t.label||"Abrir"} →</a>` : "";
+    return `<p>${t.text}${link}</p>`;
+  }).join("")}</div>`;
   html += `<div class="info-block"><h3>Ajustes</h3>
     <label class="settings-row">
       <span>Mostrar todos los días (incluidos los que ya pasaron)</span>
