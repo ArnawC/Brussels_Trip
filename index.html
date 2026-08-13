@@ -83,6 +83,15 @@
   .day-progress .bar{ flex:1; height:5px; border-radius:3px; background:var(--line); overflow:hidden;}
   .day-progress .bar > span{ display:block; height:100%; background:var(--gold); border-radius:3px; transition:width .25s ease;}
 
+  /* ---------- "IR A HOY" FLOATING BUTTON ---------- */
+  .fab-today{
+    position:absolute; right:14px; bottom:calc(76px + var(--safe-b)); z-index:8;
+    display:none; align-items:center; gap:6px; border:none; border-radius:22px; padding:10px 16px;
+    background:var(--burgundy); color:#fff; font-family:inherit; font-size:12.5px; font-weight:800;
+    box-shadow:0 6px 16px rgba(0,0,0,.28);
+  }
+  .fab-today:active{ background:var(--burgundy-deep); }
+
   .notebox{ margin:14px 18px; padding:12px 14px; background:var(--gold-soft); border-left:4px solid var(--gold); border-radius:8px; font-size:13px; line-height:1.5; color:#4a3b25;}
   .notebox p{margin:0 0 6px;}
   .notebox p:last-child{margin-bottom:0;}
@@ -266,6 +275,7 @@
     </div>
   </header>
   <main id="main"></main>
+  <button class="fab-today" id="fabToday">📍 Ir a hoy</button>
   <div class="tabbar" id="tabbar"></div>
 
   <div class="modal-backdrop" id="modalBackdrop">
@@ -604,6 +614,17 @@ async function fetchWiki(pair){
   return null;
 }
 
+// ---------- "Ir a hoy" quick-jump ----------
+const elFabToday = document.getElementById("fabToday");
+elFabToday.addEventListener("click", ()=>{
+  const todayDay = DAYS.find(d=>d.iso===TODAY);
+  if(todayDay){ active = todayDay.key; render(); }
+});
+function updateFabToday(){
+  const todayDay = DAYS.find(d=>d.iso===TODAY);
+  elFabToday.style.display = (todayDay && active !== todayDay.key) ? "flex" : "none";
+}
+
 const elModalBackdrop = document.getElementById("modalBackdrop");
 const elModalPhoto = document.getElementById("modalPhoto");
 const elModalScroll = document.getElementById("modalScroll");
@@ -796,6 +817,7 @@ function render(){
   mainEl.innerHTML = day.isInfo ? renderInfo() : renderDay(day);
   mainEl.scrollTop = 0;
   renderTabbar();
+  updateFabToday();
   if(day.isInfo){
     const chk = document.getElementById("chkShowPast");
     if(chk) chk.addEventListener("change", ()=>{ setSetting("showPastDays", chk.checked); renderTabbar(); });
