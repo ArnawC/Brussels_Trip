@@ -7,7 +7,14 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="theme-color" content="#5E1A27">
+<meta name="apple-mobile-web-app-title" content="Bru &amp; Ams">
+<meta name="description" content="Itinerario del viaje del 18 al 22 de agosto de 2026: Bruselas, Brujas, Gante, Ámsterdam, Dinant y Luxemburgo.">
 <title>Bruselas &amp; Ámsterdam</title>
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="favicon-16.png" sizes="16x16" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png" sizes="180x180">
+<link rel="manifest" href="manifest.json">
 <style>
   :root{
     --cream:#F7F2EA;
@@ -41,7 +48,10 @@
     background: linear-gradient(155deg, var(--burgundy) 0%, var(--burgundy-deep) 100%);
     color:#fff; flex-shrink:0; position:relative; z-index:5;
     box-shadow:0 6px 18px rgba(0,0,0,.18);
+    display:flex; align-items:center; gap:11px;
   }
+  header .logo{ width:38px; height:38px; flex-shrink:0; filter:drop-shadow(0 2px 5px rgba(0,0,0,.3));}
+  header .headtext{ min-width:0; }
   header .eyebrow{ font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--gold-soft); font-weight:700;}
   header h1{ font-family:Georgia, "Times New Roman", serif; font-size:18px; margin:1px 0 0; font-weight:700; line-height:1.15;}
   header .sub{ font-size:11.5px; color:#EADFCB; margin-top:2px; font-style:italic;}
@@ -212,9 +222,12 @@
 <body>
 <div id="app">
   <header>
-    <div class="eyebrow">PLANNING DE VIAJE</div>
-    <h1>Bruselas &amp; Ámsterdam</h1>
-    <div class="sub">18–22 de agosto de 2026</div>
+    <img class="logo" src="icon.svg" alt="" width="38" height="38">
+    <div class="headtext">
+      <div class="eyebrow">PLANNING DE VIAJE</div>
+      <h1>Bruselas &amp; Ámsterdam</h1>
+      <div class="sub">18–22 de agosto de 2026</div>
+    </div>
   </header>
   <main id="main"></main>
   <div class="tabbar" id="tabbar"></div>
