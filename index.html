@@ -840,6 +840,16 @@ mainEl.addEventListener("touchend", ()=>{
 }, {passive:true});
 
 render();
+
+// ---------- Offline support ----------
+// Registration silently no-ops on file:// / data: contexts (no secure origin)
+// and on the iOS "Add to Home Screen via Shortcut" data:text/html trick —
+// same graceful-degradation the wiki cache already relies on.
+if("serviceWorker" in navigator){
+  window.addEventListener("load", ()=>{
+    navigator.serviceWorker.register("sw.js").catch(()=>{});
+  });
+}
 </script>
 </body>
 </html>
