@@ -596,10 +596,10 @@ function svgPin(){
 // ---------- Emoji flavor ----------
 const EMOJI_RULES = [
   [/aeropuerto/i, "✈️"], [/tren /i, "🚆"], [/metro|tranvía/i, "🚇"], [/autobús|flibco/i, "🚌"],
-  [/taxi|uber/i, "🚕"], [/check-in|maletas|consigna/i, "🧳"], [/hotel/i, "🏨"],
+  [/\btaxi\b|\buber\b/i, "🚕"], [/check-in|maletas|consigna/i, "🧳"], [/hotel/i, "🏨"],
   [/comida|cena|desayuno/i, "🍽️"], [/chocolat/i, "🍫"], [/cerveza|leffe|delirium/i, "🍺"],
   [/basílica|iglesia|catedral|capilla|corazón/i, "⛪"], [/castillo|gravensteen|ducal|palacio/i, "🏰"],
-  [/parque|jardín|leopold/i, "🌳"], [/puente/i, "🌉"], [/mercad/i, "🛍️"], [/museo/i, "🏛️"],
+  [/parque|jardín|leopold/i, "🌳"], [/puente/i, "🌉"], [/mercad|galer[ií]a/i, "🛍️"], [/museo/i, "🏛️"],
   [/barco|canal/i, "🛥️"], [/mirador|vista|corniche/i, "📸"], [/parlamento/i, "🇪🇺"],
   [/atomium/i, "⚛️"], [/free tour|tour a pie/i, "🚶"], [/plaza|place|markt|dam\b/i, "⛲"],
   [/caminar/i, "🚶"], [/pis\b/i, "🚰"],
