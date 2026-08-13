@@ -76,6 +76,10 @@
   .day-banner .tag{ display:inline-block; font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--burgundy); font-weight:800; background:var(--gold-soft); padding:3px 9px; border-radius:20px; margin-bottom:8px;}
   .day-banner h2{ font-family:Georgia, serif; font-size:21px; margin:0 0 4px; color:var(--burgundy-deep);}
   .day-banner p{ margin:0; font-size:13.5px; color:var(--grey); font-style:italic;}
+  .day-progress{ margin-top:10px; display:flex; align-items:center; gap:8px; font-size:11.5px; font-weight:700; color:var(--grey);}
+  .day-progress .dp-label{ white-space:nowrap;}
+  .day-progress .bar{ flex:1; height:5px; border-radius:3px; background:var(--line); overflow:hidden;}
+  .day-progress .bar > span{ display:block; height:100%; background:var(--gold); border-radius:3px; transition:width .25s ease;}
 
   .notebox{ margin:14px 18px; padding:12px 14px; background:var(--gold-soft); border-left:4px solid var(--gold); border-radius:8px; font-size:13px; line-height:1.5; color:#4a3b25;}
   .notebox p{margin:0 0 6px;}
@@ -675,11 +679,45 @@ function freeBlock(fb){
   return html;
 }
 
+// ---------- Per-day progress ("X/Y paradas hechas") ----------
+function computeDayProgress(day){
+  let total = 0, done = 0, counter = 0;
+  day.sections.forEach(sec=>{
+    sec.stops.forEach(s=>{
+      counter++;
+      if(s.free) return; // free-time blocks aren't tracked as done/undone
+      total++;
+      if(SETTINGS.done[day.key + "-" + counter]) done++;
+    });
+  });
+  return {done, total};
+}
+function dayProgressHtml(day){
+  const {done, total} = computeDayProgress(day);
+  if(!total) return "";
+  const pct = Math.round((done/total)*100);
+  return `<div class="day-progress" id="dayProgress">
+    <span class="dp-label">${done}/${total} hechas</span>
+    <span class="bar"><span style="width:${pct}%"></span></span>
+  </div>`;
+}
+function updateDayProgressUI(){
+  const day = DAYS.find(d=>d.key===active);
+  if(!day || day.isInfo) return;
+  const {done, total} = computeDayProgress(day);
+  if(!total) return;
+  const label = document.querySelector("#dayProgress .dp-label");
+  const bar = document.querySelector("#dayProgress .bar > span");
+  if(label) label.textContent = `${done}/${total} hechas`;
+  if(bar) bar.style.width = Math.round((done/total)*100) + "%";
+}
+
 function renderDay(day){
   let html = `<div class="day-banner">
     <div class="tag">${day.date}</div>
     <h2>${day.title}</h2>
     <p>${day.subtitle}</p>
+    ${dayProgressHtml(day)}
   </div>`;
   html += `<div class="swipe-hint"><span class="arrows">⇠⇢</span> Desliza una parada: izquierda para marcarla hecha ✓, derecha para ver su información ⓘ</div>`;
   if(day.topNote) html += `<div class="notebox"><p>${day.topNote}</p></div>`;
@@ -780,6 +818,7 @@ function toggleDoneOnCard(card){
   card.classList.toggle("done", nowDone);
   const doneAction = card.querySelector(".action-done");
   if(doneAction) doneAction.innerHTML = `<span class="ic">${nowDone?"↺":"✓"}</span><span>${nowDone?"Desmarcar":"Hecho"}</span>`;
+  updateDayProgressUI();
 }
 
 let sw = null; // active swipe state
