@@ -1,0 +1,832 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#5E1A27">
+<title>Bruselas &amp; Ámsterdam</title>
+<style>
+  :root{
+    --cream:#F7F2EA;
+    --card:#FFFFFF;
+    --burgundy:#8B2635;
+    --burgundy-deep:#5E1A27;
+    --gold:#B08D57;
+    --gold-soft:#E7D9BE;
+    --ink:#241C16;
+    --grey:#8A8175;
+    --metro:#1B5E8C;
+    --metro-soft:#E4EEF4;
+    --reserved:#4B7A51;
+    --reserved-soft:#E8F0E6;
+    --line:#EAE2D3;
+    --safe-b: env(safe-area-inset-bottom, 0px);
+    --safe-t: env(safe-area-inset-top, 0px);
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+  html,body{margin:0; padding:0; height:100%; background:var(--burgundy-deep); overscroll-behavior-y:none;}
+  body{
+    font-family:-apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+    color:var(--ink);
+    background:var(--cream);
+  }
+  #app{ display:flex; flex-direction:column; height:100vh; height:100dvh; max-width:600px; margin:0 auto; background:var(--cream); position:relative; overflow:hidden;}
+
+  /* ---------- HEADER ---------- */
+  header{
+    padding: calc(8px + var(--safe-t)) 18px 10px;
+    background: linear-gradient(155deg, var(--burgundy) 0%, var(--burgundy-deep) 100%);
+    color:#fff; flex-shrink:0; position:relative; z-index:5;
+    box-shadow:0 6px 18px rgba(0,0,0,.18);
+  }
+  header .eyebrow{ font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--gold-soft); font-weight:700;}
+  header h1{ font-family:Georgia, "Times New Roman", serif; font-size:18px; margin:1px 0 0; font-weight:700; line-height:1.15;}
+  header .sub{ font-size:11.5px; color:#EADFCB; margin-top:2px; font-style:italic;}
+
+  /* ---------- DAY PILLS ---------- */
+  nav.pills{
+    display:flex; gap:6px; padding:10px 14px 12px; overflow-x:auto;
+    background:var(--burgundy-deep); flex-shrink:0; -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+  }
+  nav.pills::-webkit-scrollbar{display:none;}
+  nav.pills button{
+    flex:0 0 auto; border:none; border-radius:20px; padding:8px 14px; font-size:12.5px; font-weight:700;
+    background:rgba(255,255,255,.10); color:#EADFCB; white-space:nowrap; font-family:inherit;
+    transition:background .15s, color .15s;
+  }
+  nav.pills button.active{ background:var(--gold); color:var(--burgundy-deep); }
+
+  /* ---------- MAIN SCROLL ---------- */
+  main{ flex:1; overflow-y:auto; -webkit-overflow-scrolling:touch; padding-bottom: calc(80px + var(--safe-b)); }
+  .day-banner{ padding:18px 18px 14px; border-bottom:1px solid var(--line);}
+  .day-banner .tag{ display:inline-block; font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--burgundy); font-weight:800; background:var(--gold-soft); padding:3px 9px; border-radius:20px; margin-bottom:8px;}
+  .day-banner h2{ font-family:Georgia, serif; font-size:21px; margin:0 0 4px; color:var(--burgundy-deep);}
+  .day-banner p{ margin:0; font-size:13.5px; color:var(--grey); font-style:italic;}
+
+  .notebox{ margin:14px 18px; padding:12px 14px; background:var(--gold-soft); border-left:4px solid var(--gold); border-radius:8px; font-size:13px; line-height:1.5; color:#4a3b25;}
+  .notebox p{margin:0 0 6px;}
+  .notebox p:last-child{margin-bottom:0;}
+
+  .section-label{ position:sticky; top:0; z-index:3; background:linear-gradient(var(--cream) 80%, transparent); padding:14px 18px 8px; font-family:Georgia, serif; font-size:16px; font-weight:700; color:var(--burgundy-deep);}
+
+  .stop{ margin:0 18px 12px; border-radius:14px; position:relative; overflow:hidden; box-shadow:0 1px 3px rgba(90,60,30,.08);}
+  .stop-content{ background:var(--card); border-radius:14px; padding:13px 15px; border:1px solid var(--line); position:relative; z-index:2; transition:opacity .2s; touch-action:pan-y;}
+  .stop.dragging .stop-content{ transition:none; }
+  .stop.done .stop-content{ opacity:.55; }
+  .stop.done .title{ text-decoration:line-through; }
+  .stop.metro .stop-content{ border-left:4px solid var(--metro); }
+  .stop.reserved .stop-content{ border-left:4px solid var(--reserved); }
+  .stop.plain .stop-content{ border-left:4px solid var(--gold); }
+  .stop .row1{ display:flex; align-items:baseline; gap:8px; flex-wrap:wrap;}
+  .stop .time{ font-weight:800; color:var(--burgundy); font-size:13.5px; white-space:nowrap; margin-right:2px;}
+  .stop .emoji{ margin-right:2px;}
+  .stop .title{ font-weight:700; font-size:15px; color:var(--ink); line-height:1.3;}
+  .stop .chip{ font-size:10px; font-weight:800; text-transform:uppercase; letter-spacing:.05em; padding:2px 8px; border-radius:10px; margin-left:auto; white-space:nowrap;}
+  .stop.metro .chip{ background:var(--metro-soft); color:var(--metro);}
+  .stop.reserved .chip{ background:var(--reserved-soft); color:var(--reserved);}
+  .stop .desc{ margin-top:6px; font-size:13.5px; line-height:1.5; color:#4a4038;}
+  .stop .desc p{ margin:0 0 5px;}
+  .stop .desc p:last-child{ margin-bottom:0;}
+
+  /* ---------- SWIPE ACTIONS ---------- */
+  .swipe-action{
+    position:absolute; top:0; bottom:0; width:96px; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; z-index:1; opacity:0; font-size:11px; font-weight:800;
+    color:#fff; gap:3px; text-align:center; padding:0 6px;
+  }
+  .swipe-action .ic{ font-size:19px; line-height:1;}
+  .action-info{ left:0; background:linear-gradient(135deg, var(--metro), #123f5c);}
+  .action-done{ right:0; background:linear-gradient(135deg, var(--reserved), #33552f);}
+  .stop.done .action-done{ background:linear-gradient(135deg, #9a7a3d, var(--gold));}
+
+  .maplink{
+    display:inline-flex; align-items:center; gap:6px; margin-top:10px; font-size:12.5px; font-weight:800;
+    color:#fff; background:var(--burgundy); padding:7px 13px; border-radius:20px; text-decoration:none;
+    letter-spacing:.02em;
+  }
+  .maplink.route{ background:var(--gold); color:var(--burgundy-deep);}
+  .maplink svg{ width:13px; height:13px; flex-shrink:0;}
+
+  .swipe-hint{ margin:0 18px 14px; font-size:11.5px; color:var(--grey); display:flex; align-items:center; gap:6px; }
+  .swipe-hint .arrows{ font-size:13px; }
+
+  .routebar{ margin:4px 18px 20px; padding:10px 14px; background:var(--gold-soft); border-radius:10px; font-size:12.5px; display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap;}
+  .routebar b{ color:var(--burgundy-deep); }
+
+  /* ---------- INFO TAB ---------- */
+  .info-block{ margin:16px 18px; }
+  .info-block h3{ font-family:Georgia, serif; font-size:16px; color:var(--burgundy-deep); margin:0 0 8px; border-bottom:1px solid var(--gold-soft); padding-bottom:6px;}
+  .info-row{ font-size:13.5px; line-height:1.6; margin-bottom:8px; color:#3a2f26;}
+  .info-row b{ color:var(--burgundy);}
+
+  /* ---------- TAB BAR ---------- */
+  .tabbar{
+    position:absolute; left:0; right:0; bottom:0; z-index:10;
+    display:flex; background:rgba(255,255,255,.92); backdrop-filter:blur(14px);
+    border-top:1px solid var(--line); padding:8px 4px calc(6px + var(--safe-b));
+  }
+  .tabbar button{
+    flex:1; display:flex; flex-direction:column; align-items:center; gap:2px; background:none; border:none; font-family:inherit;
+    color:var(--grey); padding:4px 0;
+  }
+  .tabbar button .dot{
+    width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+    font-size:12px; font-weight:800; background:var(--line); color:var(--grey); margin-bottom:1px;
+  }
+  .tabbar button.active{ color:var(--burgundy);}
+  .tabbar button.active .dot{ background:var(--burgundy); color:#fff;}
+  .tabbar button.today .dot{ box-shadow:0 0 0 2px var(--gold);}
+  .tabbar button .lbl{ font-size:10px; font-weight:700;}
+
+  /* ---------- MODAL (place info sheet) ---------- */
+  .modal-backdrop{
+    position:absolute; top:0; right:0; bottom:0; left:0; background:rgba(20,10,5,.55); opacity:0; pointer-events:none;
+    transition:opacity .25s ease; z-index:50;
+  }
+  .modal-backdrop.open{ opacity:1; pointer-events:auto; }
+  .modal-sheet{
+    position:absolute; left:0; right:0; bottom:0; background:var(--cream);
+    border-radius:20px 20px 0 0; max-height:86%; transform:translateY(102%);
+    transition:transform .32s cubic-bezier(.22,.85,.25,1); overflow:hidden;
+    display:flex; flex-direction:column; box-shadow:0 -8px 30px rgba(0,0,0,.25);
+  }
+  .modal-backdrop.open .modal-sheet{ transform:translateY(0); }
+  .modal-handle{ width:36px; height:4px; border-radius:3px; background:var(--line); margin:8px auto 2px; flex-shrink:0;}
+  .modal-photo{ width:100%; height:190px; background:linear-gradient(135deg,var(--gold-soft),var(--line)); position:relative; flex-shrink:0; overflow:hidden;}
+  .modal-photo img{ width:100%; height:100%; object-fit:cover; display:block;}
+  .modal-photo .ph-fallback{ position:absolute; top:0; right:0; bottom:0; left:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; padding:0 24px; text-align:center;}
+  .modal-photo .ph-fallback .letter{ font-family:Georgia,serif; font-size:38px; color:var(--gold); font-weight:700;}
+  .modal-photo .ph-fallback .retry-msg{ font-size:11.5px; color:var(--grey); line-height:1.4;}
+  .modal-photo .ph-fallback .retry-link{ color:var(--metro); font-weight:700; text-decoration:underline; cursor:pointer;}
+  .modal-photo .ph-spinner{ position:absolute; top:0; right:0; bottom:0; left:0; display:flex; align-items:center; justify-content:center;}
+  .modal-photo .ph-spinner span{ width:22px; height:22px; border-radius:50%; border:3px solid rgba(139,38,53,.18); border-top-color:var(--burgundy); animation:spin 0.8s linear infinite;}
+  @keyframes spin{ to{ transform:rotate(360deg); } }
+  .modal-close{
+    position:absolute; top:10px; right:10px; width:30px; height:30px; border-radius:50%;
+    background:rgba(20,10,5,.45); color:#fff; border:none; font-size:15px; z-index:2;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .modal-scroll{ overflow-y:auto; -webkit-overflow-scrolling:touch; padding:14px 20px calc(24px + var(--safe-b));}
+  .modal-scroll h3{ font-family:Georgia, serif; font-size:19px; color:var(--burgundy-deep); margin:0 0 8px; line-height:1.25;}
+  .modal-wiki{ font-size:13.5px; line-height:1.55; color:#3a2f26; margin:0 0 12px; padding-bottom:12px; border-bottom:1px solid var(--line);}
+  .modal-wiki .src{ display:block; margin-top:7px; font-size:10px; color:var(--grey); text-transform:uppercase; letter-spacing:.06em; font-weight:700;}
+  .modal-desc p{ margin:0 0 6px; font-size:13.5px; line-height:1.5; color:#4a4038;}
+  .modal-desc p:last-child{ margin-bottom:0; }
+  .modal-loading-text{ font-size:12.5px; color:var(--grey); font-style:italic; }
+
+  /* ---------- FREE TIME BLOCK ---------- */
+  .freeblock{
+    margin:0 18px 12px; background:repeating-linear-gradient(135deg, #FBF6EC 0 10px, #F6EFDF 10px 20px);
+    border:1.5px dashed var(--gold); border-radius:14px; padding:14px 15px 12px; position:relative;
+  }
+  .fb-ribbon{ display:inline-block; font-size:10px; font-weight:800; letter-spacing:.08em; color:#fff; background:var(--gold); padding:3px 10px; border-radius:8px; margin-bottom:8px;}
+  .fb-title{ font-weight:700; font-size:15px; color:var(--ink);}
+  .fb-desc p{ margin:6px 0 0; font-size:13px; line-height:1.5; color:#4a4038;}
+  .fb-subs{ margin-top:10px; border-top:1px dashed var(--gold); padding-top:8px;}
+  .fb-sub-row{ display:flex; align-items:center; gap:6px; padding:6px 0; border-bottom:1px dotted #E2D3AE;}
+  .fb-sub-row:last-child{ border-bottom:none;}
+  .fb-sub-title{ font-size:13px; font-weight:600; color:var(--ink); flex:1;}
+  .fb-info-btn{
+    width:19px; height:19px; border-radius:50%; border:1.5px solid var(--gold); color:#9a7a3d;
+    background:#fff; font-size:11px; font-weight:700; font-family:-apple-system, BlinkMacSystemFont, sans-serif;
+    display:inline-flex; align-items:center; justify-content:center; flex-shrink:0;
+    padding:0; line-height:1; text-align:center;
+  }
+  .fb-info-btn:active{ background:var(--gold); color:#fff; }
+  .maplink.sub{ padding:5px 8px; margin-top:0;}
+  .maplink.sub svg{ width:12px; height:12px; margin:0;}
+
+  /* ---------- SETTINGS (Info tab) ---------- */
+  .settings-row{ display:flex; align-items:center; justify-content:space-between; gap:12px; font-size:13px; color:#3a2f26; padding:8px 0;}
+  .settings-row input{ flex-shrink:0; width:20px; height:20px; accent-color:var(--burgundy);}
+  .settings-btn{ margin-top:6px; width:100%; padding:10px; border-radius:10px; border:1.5px solid var(--burgundy); background:#fff; color:var(--burgundy); font-weight:700; font-size:13px; font-family:inherit; transition:background .15s, color .15s;}
+  .settings-btn:active{ background:var(--burgundy); color:#fff;}
+  .settings-btn.danger{ background:var(--burgundy); color:#fff; border-color:var(--burgundy-deep);}
+  .settings-note{ margin:10px 0 0; font-size:11.5px; color:var(--grey); line-height:1.5; font-style:italic;}
+</style>
+</head>
+<body>
+<div id="app">
+  <header>
+    <div class="eyebrow">PLANNING DE VIAJE</div>
+    <h1>Bruselas &amp; Ámsterdam</h1>
+    <div class="sub">18–22 de agosto de 2026</div>
+  </header>
+  <main id="main"></main>
+  <div class="tabbar" id="tabbar"></div>
+
+  <div class="modal-backdrop" id="modalBackdrop">
+    <div class="modal-sheet" id="modalSheet">
+      <div class="modal-handle"></div>
+      <button class="modal-close" id="modalClose">✕</button>
+      <div class="modal-photo" id="modalPhoto"></div>
+      <div class="modal-scroll" id="modalScroll"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ============================================================
+// DATA
+// ============================================================
+const P = {
+  hotel:[50.833145,4.356487], bru:[50.900240,4.485944], crl:[50.469386,4.470638],
+  midi:[50.836440,4.337009], grandplace:[50.846789,4.352436], sablon:[50.840433,4.356253],
+  carrefoureuropa:[50.845463,4.356194], saint_hubert:[50.848083,4.355251],
+  ste_catherine:[50.850770,4.348130], delirium:[50.848500,4.353883], atomium:[50.894879,4.341555],
+  cinquantenaire:[50.841393,4.390483], marolles:[50.837048,4.345820], porte_hal:[50.832917,4.344844],
+  saint_gery:[50.847899,4.347138], rueneuve:[50.851208,4.354572], koekelberg:[50.867222,4.316947],
+  parc_leopold:[50.838900,4.378300], berlaymont:[50.843800,4.381600], parlamento:[50.837700,4.365100],
+  muro_berlin:[50.839600,4.379800],
+  brugge_station:[51.197666,3.217851], brugge_markt:[51.208147,3.224801], brugge_burg:[51.208506,3.226838],
+  brugge_onzelievevrouw:[51.204690,3.224447], brugge_begijnhof:[51.201345,3.222709], brugge_minnewater:[51.199729,3.223942],
+  brugge_rozenhoedkaai:[51.206500,3.227300], brugge_vismarkt:[51.208700,3.227600],
+  gent_station:[51.036113,3.710839], gent_gravensteen:[51.057177,3.720723], gent_graslei:[51.054768,3.720750],
+  gent_stbavo:[51.053234,3.726506], gent_michielsbrug:[51.053700,3.720300], gent_groentenmarkt:[51.055400,3.720200],
+  gent_vrijdagmarkt:[51.056300,3.724000],
+  amsterdam:[52.373169,4.892839],
+  ams_dam:[52.373169,4.892839], ams_wallen:[52.374362,4.899431], ams_nieuwmarkt:[52.372442,4.900253],
+  ams_negenstraatjes:[52.370800,4.885900],
+  dinant_ciudadela:[50.260300,4.910600], dinant_mosa:[50.259700,4.911800], dinant_sax:[50.260600,4.911200],
+  lux_corniche:[49.610700,6.135200], lux_bock:[49.611300,6.135900], lux_grund:[49.608800,6.132900],
+  lux_placedarmes:[49.610900,6.129400],
+};
+function pt(p){ return `https://www.google.com/maps/search/?api=1&query=${p[0]},${p[1]}`; }
+function dir(points, mode){
+  const o = points[0], d = points[points.length-1], mid = points.slice(1,-1);
+  let u = `https://www.google.com/maps/dir/?api=1&origin=${o[0]},${o[1]}&destination=${d[0]},${d[1]}&travelmode=${mode||"walking"}`;
+  if(mid.length) u += "&waypoints=" + mid.map(m=>`${m[0]},${m[1]}`).join("|");
+  return u;
+}
+
+// stop: {t: time, ti: title, d:[desc lines], url, kind: 'metro'|'reserved'|null}
+const DAYS = [
+{
+  key:"info", isInfo:true, short:"Info",
+},
+{
+  key:"d1", iso:"2026-08-18", short:"Mar 18", date:"Día 1 · Martes 18 de agosto", title:"Llegada + Free Tour",
+  subtitle:"Aterrizaje en Bruselas, una zona distinta por la mañana y free tour al atardecer",
+  sections:[
+    {name:"Mañana", stops:[
+      {t:"07:40", ti:"Aterrizaje en el Aeropuerto de Bruselas (BRU)", d:["Contad 30–40 min para pasaportes y maletas."], url:pt(P.bru)},
+      {t:"≈08:30", ti:"Traslado al hotel en tren + metro/tranvía", kind:"metro", d:["Tren Airport → Bruxelles-Central (~20 min).","Tranvía 92/93 o metro L2/L6 hasta Louise (~10-15 min) + 5 min a pie.","Alternativa: taxi/Uber directo (~25-30 min)."], url:dir([P.bru,P.hotel],"transit")},
+      {t:"≈09:30", ti:"Check-in / dejar maletas en el hotel", d:["Check-in desde las 15:00, pero hay consigna de maletas."], url:pt(P.hotel)},
+      {t:"10:00", ti:"Caminar hacia Grand Place", d:["20-25 min a pie por Avenue Louise."], url:dir([P.hotel,P.grandplace],"walking")},
+      {t:"10:25–10:50", ti:"Galerías Reales de San Huberto", d:["Galería del siglo XIX, entrada libre. Chocolaterías Neuhaus, Corné."], url:pt(P.saint_hubert), wiki:["Galerías_Reales_de_San_Huberto","Royal_Galleries_of_Saint-Hubert"]},
+      {t:"11:00–11:45", ti:"Rue Neuve", d:["La calle comercial más concurrida de Bruselas."], url:pt(P.rueneuve)},
+      {t:"11:55", ti:"Comida rápida cerca de Rue Neuve", d:["Algo ligero — 20-25 min de caminata hasta el Parlamento."]},
+      {t:"12:15", ti:"Caminar hacia Schuman (Barrio Europeo)", d:["20-25 min a pie por Rue de la Loi."], url:dir([P.grandplace,P.parlamento],"walking")},
+    ]},
+    {name:"Mediodía — Parlamento Europeo", stops:[
+      {t:"13:00–14:00", ti:"Parlamento Europeo — visita al Hemiciclo", kind:"reserved", d:["Visita reservada a las 13:00. Llevad el DNI/pasaporte."], url:pt(P.parlamento), wiki:["Parlamento_Europeo","European_Parliament"]},
+      {t:"14:00–14:20", ti:"Muro de Berlín (tramo conservado)", d:["Fragmento original, pocos minutos de la salida del Parlamento."], url:pt(P.muro_berlin), wiki:[null,"Berlin_Wall"]},
+      {t:"14:20–14:45", ti:"Berlaymont + Parque Leopold", d:["Sede de la Comisión Europea por fuera, y paseo tranquilo por el parque."], url:pt(P.berlaymont), wiki:["Edificio_Berlaymont","Berlaymont_building"]},
+    ]},
+    {name:"Tarde", stops:[
+      {t:"15:00–15:35", ti:"Caminar de vuelta a Grand Place", d:["32 min a pie por Rue Belliard, cruzando el Parque de Bruselas."], url:dir([P.parc_leopold,P.grandplace],"walking")},
+      {t:"15:35–16:45", ti:"Tiempo libre cerca de Grand Place", d:["Pausa con calma en una terraza antes del free tour."]},
+    ]},
+    {name:"Atardecer — Free Tour", stops:[
+      {t:"17:00–19:00", ti:"Free Tour por Bruselas", kind:"reserved", d:["Punto de encuentro: Grand Place, frente al Ayuntamiento. 2h.","Recorrido: Grand Place → Manneken Pis → Bolsa (Beer World) → murales de cómic → Sablon → Palacio de Justicia → Plaza Real → Catedral → Mont des Arts.","Estas paradas ya quedan cubiertas por el guía."], url:pt(P.grandplace), wiki:["Grand-Place","Grand-Place"]},
+    ]},
+    {name:"Noche", stops:[
+      {t:"19:15", ti:"Barrio de Saint-Géry + Zinneke Pis", d:["Antiguas Halles, y la escultura del perrito (3ª estatua \"pis\")."], url:pt(P.saint_gery), wiki:["Halles_de_Saint-Géry","Sint-Gorikshallen"]},
+      {t:"19:35", ti:"Sainte-Catherine + Mercado del Pescado", d:["Antiguo puerto, zona de marisquerías y terrazas."], url:pt(P.ste_catherine), wiki:[null,"Sainte-Catherine/Sint-Katelijne"]},
+      {t:"20:15", ti:"Cena + Delirium Café + Jeanneke Pis", d:["Delirium Café (+2000 cervezas) y la versión femenina del Manneken Pis enfrente."], url:pt(P.delirium), wiki:["Jeanneke_Pis","Jeanneke_Pis"]},
+      {t:"≈21:45", ti:"Vuelta al hotel caminando", d:["20-25 min a pie por Avenue Louise, de noche."], url:dir([P.grandplace,P.hotel],"walking")},
+    ]},
+  ],
+  note:"Primer día a tope nada más bajar del avión: hay que ser puntuales llegando a Schuman para la visita de las 13:00. Si vais con el tiempo justo, lo primero que se acorta es Rue Neuve."
+},
+{
+  key:"d2", iso:"2026-08-19", short:"Mié 19", date:"Día 2 · Miércoles 19 de agosto", title:"Brujas y Gante por libre",
+  subtitle:"En tren y a vuestro ritmo, sin horarios de autobús ni guía",
+  sections:[
+    {name:"Mañana", stops:[
+      {t:"08:00", ti:"Caminar hacia Bruxelles-Midi", d:["18-20 min a pie desde el hotel."], url:dir([P.hotel,P.midi],"walking")},
+      {t:"≈08:30", ti:"Tren directo a Brujas", kind:"metro", d:["~1h. Trenes IC frecuentes desde Bruxelles-Midi/Central/Nord."]},
+      {t:"≈09:30", ti:"Llegada a Brujas — caminar al centro", d:["10 min a pie hasta el Lago del Amor."], url:dir([P.brugge_station,P.brugge_minnewater],"walking")},
+      {t:"09:40–10:00", ti:"Lago del Amor (Minnewater) + Begijnhof", d:["Paseo romántico y recinto de casitas blancas — gratis."], url:pt(P.brugge_minnewater), wiki:["Beaterio_de_Brujas","Bruges_Beguinage"]},
+      {t:"10:10–10:30", ti:"Iglesia N. Señora + Puente Bonifacio", d:["Entrada libre al templo. Puente Bonifacio: rincón escondido, ideal para foto."], url:pt(P.brugge_onzelievevrouw), wiki:["Iglesia_de_Nuestra_Señora_(Brujas)","Church_of_Our_Lady,_Bruges"]},
+      {t:"10:40–11:10", ti:"Burg + Basílica de la Santa Sangre", d:["Ayuntamiento gótico y capilla baja gratuita."], url:pt(P.brugge_burg), wiki:["Basílica_de_la_Santa_Sangre","Basilica_of_the_Holy_Blood"]},
+      {t:"11:12", ti:"Vismarkt", d:["Antiguo mercado del pescado, 1 min del Burg."], url:pt(P.brugge_vismarkt)},
+      {t:"11:15", ti:"Rozenhoedkaai", d:["El rincón más fotografiado de Brujas."], url:pt(P.brugge_rozenhoedkaai), wiki:[null,"Rozenhoedkaai"]},
+      {t:"11:25–13:00", ti:"Markt + Belfort + chocolaterías", d:["Belfort: subida de pago opcional (~360 escalones).","The Chocolate Line, Chocolatier Dumon, The Old Chocolate House.","Opcional: paseo en barco (~30-45 min, de pago)."], url:pt(P.brugge_markt), wiki:["Campanario_de_Brujas","Belfry_of_Bruges"]},
+    ]},
+    {name:"Mediodía", stops:[
+      {t:"13:00–14:00", ti:"Comida en Brujas", d:["Zona del Markt, algo más allá de la plaza."]},
+      {t:"≈14:15", ti:"Caminar a la estación de Brujas", d:["15-20 min a pie."], url:dir([P.brugge_markt,P.brugge_station],"walking")},
+      {t:"≈14:30", ti:"Tren Brujas → Gante", kind:"metro", d:["~25-30 min, trenes frecuentes."]},
+    ]},
+    {name:"Tarde", stops:[
+      {t:"≈15:00", ti:"Llegada a Gante — Puente de San Miguel", d:["20 min a pie desde Gent-Sint-Pieters."], url:dir([P.gent_station,P.gent_michielsbrug],"walking")},
+      {t:"15:20", ti:"Puente de San Miguel", d:["EL mirador de Gante: las \"tres torres\" y Graslei/Korenlei a la vez."], url:pt(P.gent_michielsbrug), wiki:[null,"Sint-Michielsbrug"]},
+      {t:"15:30–16:15", ti:"Graslei y Korenlei + Groentenmarkt", d:["El muelle más fotogénico de Bélgica — gratis."], url:pt(P.gent_graslei), wiki:["Graslei","Graslei"]},
+      {t:"16:20–17:15", ti:"Gravensteen + Patershol", d:["Castillo imponente por fuera; barrio medieval detrás."], url:pt(P.gent_gravensteen), wiki:["Castillo_de_los_Condes_de_Flandes","Gravensteen"]},
+      {t:"17:20", ti:"Vrijdagmarkt + Dulle Griet", d:["Plaza histórica y cañón medieval — 5 min de desvío."], url:pt(P.gent_vrijdagmarkt), wiki:[null,"Dulle_Griet"]},
+      {t:"17:30–18:30", ti:"Las tres torres: San Nicolás, Belfort, San Bavón", d:["En fila hacia el centro. San Bavón: templo gratis, Retablo de pago aparte."], url:pt(P.gent_stbavo), wiki:["Catedral_de_San_Bavón","St_Bavo's_Cathedral,_Ghent"]},
+    ]},
+    {name:"Noche", stops:[
+      {t:"18:30–19:30", ti:"Cena en Gante", d:["Zona de Graslei/Patershol, buen ambiente."]},
+      {t:"≈19:45", ti:"Tren Gante → Bruselas", kind:"metro", d:["Directo, ~35-40 min a Bruxelles-Midi/Central."]},
+      {t:"≈20:45", ti:"Caminar al hotel", d:["18-20 min a pie desde Bruxelles-Midi."], url:dir([P.midi,P.hotel],"walking")},
+    ]},
+  ],
+  note:"Descuento \"Youth (-26)\": ella (24) viaja 40% más barata en los 3 trayectos — comprar con su fecha de nacimiento en la cuenta SNCB. Él (26) ya paga tarifa normal."
+},
+{
+  key:"d3", iso:"2026-08-20", short:"Jue 20", date:"Día 3 · Jueves 20 de agosto", title:"Excursión a Ámsterdam",
+  subtitle:"Día completo (reservado) — paseo en barco y tiempo libre",
+  sections:[
+    {name:"Mañana", stops:[
+      {t:"≈07:30", ti:"Hacia el punto de encuentro", d:["Carrefour de l'Europe: 20 min a pie."], url:dir([P.hotel,P.carrefoureuropa],"walking")},
+      {t:"08:00", ti:"Salida en autobús hacia Ámsterdam", kind:"reserved", d:["~3h30 cruzando la frontera con Holanda."], url:pt(P.carrefoureuropa)},
+      {t:"≈11:30", ti:"Llegada + paseo en barco (1h)", kind:"reserved", d:["Canales Herengracht, Keizersgracht, Prinsengracht, Jordaan, Ana Frank."], wiki:["Canales_de_Ámsterdam","Canals_of_Amsterdam"]},
+    ]},
+    {name:"Tarde", stops:[
+      {t:"≈12:30–16:00", ti:"Tiempo libre en Ámsterdam (3h30)", free:true, d:["Rijksmuseum/Ana Frank requieren entrada anticipada — reservad antes de salir de Bruselas si os interesa."],
+        subs:[
+          {ti:"Plaza Dam", url:pt(P.ams_dam), wiki:["Plaza_Dam","Dam_Square"]},
+          {ti:"Barrio Rojo (De Wallen)", url:pt(P.ams_wallen), wiki:["De_Wallen","De_Wallen"]},
+          {ti:"Nieuwmarkt", url:pt(P.ams_nieuwmarkt), wiki:["Nieuwmarkt","Nieuwmarkt,_Amsterdam"]},
+          {ti:"Nueve Calles (De Negen Straatjes)", url:pt(P.ams_negenstraatjes), wiki:["De_Negen_Straatjes","Nine_Streets"]},
+        ]},
+      {t:"por la tarde", ti:"Regreso en autobús a Bruselas", d:["~3h30. Excursión de ~12h en total desde las 8:00."]},
+    ]},
+    {name:"Noche", stops:[
+      {t:"≈20:00", ti:"Llegada a Carrefour de l'Europe", d:["Varias opciones para cenar antes de volver."], url:pt(P.carrefoureuropa)},
+      {t:"≈21:00", ti:"Vuelta al hotel caminando", d:["20 min a pie."], url:dir([P.carrefoureuropa,P.hotel],"walking")},
+    ]},
+  ],
+  note:"El itinerario del barco puede variar según tráfico. Llevad el bono electrónico en el móvil."
+},
+{
+  key:"d4", iso:"2026-08-21", short:"Vie 21", date:"Día 4 · Viernes 21 de agosto", title:"Dinant y Luxemburgo",
+  subtitle:"Día completo (reservado) — Valonia y el Gran Ducado",
+  sections:[
+    {name:"Mañana", stops:[
+      {t:"≈07:30", ti:"Hacia el punto de encuentro", d:["Carrefour de l'Europe: 20 min a pie."], url:dir([P.hotel,P.carrefoureuropa],"walking")},
+      {t:"08:00", ti:"Autobús hacia Dinant", kind:"reserved", d:["Colegiata de Notre-Dame, Casa de Adolphe Sax, Maison Leffe."], url:pt(P.carrefoureuropa), wiki:["Dinant","Dinant"]},
+      {t:"≈10:30–11:30", ti:"Tiempo libre en Dinant", free:true, d:["El guía ya señala la colegiata y la Casa de Adolphe Sax desde el bus — con este rato podéis acercaros por vuestra cuenta."],
+        subs:[
+          {ti:"Ciudadela de Dinant (mirador + teleférico, de pago)", url:pt(P.dinant_ciudadela), wiki:["Ciudadela_de_Dinant","Citadel_of_Dinant"]},
+          {ti:"Paseo junto al río Mosa", url:pt(P.dinant_mosa), wiki:[null,"Meuse"]},
+          {ti:"Casa de Adolphe Sax (exterior)", url:pt(P.dinant_sax), wiki:["Adolphe_Sax","Adolphe_Sax"]},
+        ]},
+    ]},
+    {name:"Mediodía", stops:[
+      {t:"≈11:30", ti:"Autobús hacia Luxemburgo", d:["Cruzando la frontera del Gran Ducado."]},
+      {t:"≈13:00", ti:"Tour a pie por Luxemburgo", kind:"reserved", d:["Palacio Ducal, Hôtel de Ville, catedral de Notre-Dame."], wiki:["Palacio_Gran_Ducal_de_Luxemburgo","Grand_Ducal_Palace,_Luxembourg"]},
+    ]},
+    {name:"Tarde", stops:[
+      {t:"≈14:00–16:30", ti:"Tiempo libre en Luxemburgo", free:true, d:["El tour a pie ya cubre el Palacio Ducal, Hôtel de Ville y la catedral — este rato es para explorar los miradores y el Grund."],
+        subs:[
+          {ti:"Chemin de la Corniche (\"el balcón más bonito de Europa\")", url:pt(P.lux_corniche), wiki:["Chemin_de_la_Corniche_(Luxemburgo)","Chemin_de_la_Corniche"]},
+          {ti:"Casemates du Bock (fortificaciones, exterior gratis)", url:pt(P.lux_bock), wiki:["Casamatas_del_Bock","Bock_Casemates"]},
+          {ti:"Barrio del Grund (junto al río Alzette)", url:pt(P.lux_grund), wiki:["Grund","Grund"]},
+          {ti:"Place d'Armes (centro, terrazas)", url:pt(P.lux_placedarmes), wiki:["Place_d'Armes_(Luxemburgo)","Place_d'Armes,_Luxembourg_City"]},
+        ]},
+      {t:"≈16:30", ti:"Regreso en autobús a Bruselas", d:["Excursión completa: 11h30-12h."]},
+    ]},
+    {name:"Noche", stops:[
+      {t:"≈19:30–20:00", ti:"Llegada a Bruxelles-Central", url:pt(P.carrefoureuropa)},
+      {t:"≈20:30", ti:"Cena y vuelta al hotel caminando", d:["20 min a pie desde Carrefour de l'Europe."], url:dir([P.carrefoureuropa,P.hotel],"walking")},
+    ]},
+  ],
+  note:"Dinant se ve en poco tiempo — no os preocupéis si el guía acorta esa parada para dar más margen en Luxemburgo."
+},
+{
+  key:"d5", iso:"2026-08-22", short:"Sáb 22", date:"Día 5 · Sábado 22 de agosto", title:"Sagrado Corazón, Atomium y Sablon",
+  subtitle:"Última mañana a tope antes del traslado a Charleroi",
+  sections:[
+    {name:"Mañana", stops:[
+      {t:"07:15", ti:"Desayuno y maletas en consigna", url:pt(P.hotel)},
+      {t:"07:30", ti:"Metro hacia Simonis", kind:"metro", d:["Línea 2 desde Louise (~20 min)."], url:dir([P.hotel,P.koekelberg],"transit")},
+      {t:"07:50–08:20", ti:"Basílica del Sagrado Corazón", d:["5ª iglesia más grande del mundo. Templo gratis; cúpula/terraza de pago."], url:pt(P.koekelberg), wiki:["Basílica_del_Sagrado_Corazón_(Bruselas)","National_Basilica_of_the_Sacred_Heart"]},
+      {t:"08:30", ti:"Metro (línea 6) hacia Heysel", kind:"metro", d:["~15 min, sin cambios."], url:dir([P.koekelberg,P.atomium],"transit")},
+      {t:"08:45–09:25", ti:"Atomium (vista exterior)", d:["Impresiona igual desde el parque de alrededor."], url:pt(P.atomium), wiki:["Atomium","Atomium"]},
+      {t:"09:40", ti:"Metro/tranvía hacia el Cincuentenario", kind:"metro", d:["~35-40 min con transbordo."], url:dir([P.atomium,P.cinquantenaire],"transit")},
+      {t:"10:20–10:45", ti:"Cincuentenario + Arco del Triunfo", d:["Entrada libre. Mirador gratuito en el Museo de Historia Militar."], url:pt(P.cinquantenaire), wiki:["Parque_del_Cincuentenario","Parc_du_Cinquantenaire"]},
+      {t:"11:00", ti:"Metro/tranvía hacia Puerta de Halle", kind:"metro", d:["~30-35 min con transbordo."], url:dir([P.cinquantenaire,P.porte_hal],"transit")},
+      {t:"11:35–12:00", ti:"Puerta de Halle", d:["Última puerta de la muralla medieval. Museo interior de pago."], url:pt(P.porte_hal), wiki:["Puerta_de_Halle","Halle_Gate"]},
+      {t:"12:10–12:55", ti:"Mercadillo de las Marolles", d:["Antigüedades al aire libre, hasta las 14:00. Solo efectivo."], url:pt(P.marolles), wiki:["Marolles_(Bruselas)","Marolles/Marollen"]},
+      {t:"13:05–13:30", ti:"Grand Sablon + Petit Sablon", d:["Chocolaterías, anticuarios y jardín con 48 estatuas de bronce."], url:pt(P.sablon), wiki:[null,"Sablon/Zavel"]},
+    ]},
+    {name:"Mediodía — Traslado al aeropuerto", stops:[
+      {t:"13:30", ti:"Caminar al hotel", d:["12-15 min a pie desde Sablon."], url:dir([P.sablon,P.hotel],"walking")},
+      {t:"13:45–14:15", ti:"Comida rápida y recoger maletas", d:["Algo ligero — sin margen para comida larga."]},
+      {t:"14:15", ti:"Caminar a Bruxelles-Midi", d:["18-20 min a pie."], url:dir([P.hotel,P.midi],"walking")},
+      {t:"≈14:45", ti:"Autobús Flibco a Charleroi", kind:"metro", d:["~1h. Comprad el billete con antelación en la app/web.","Llegada al aeropuerto ≈15:45, 15 min antes del objetivo 16:00 (vuelo 18:15, 2,5h reales de colchón)."], url:dir([P.midi,P.crl],"driving")},
+      {t:"16:00", ti:"Aeropuerto de Charleroi (CRL)", d:["Facturación y seguridad antes del vuelo FR2828 a Reus (18:15)."], url:pt(P.crl)},
+    ]},
+  ],
+  note:"Día con menos margen del viaje. Si vais lentos, orden para recortar: 1) Puerta de Halle, 2) acortar Marolles, 3) saltar de Cincuentenario al hotel directamente."
+},
+];
+
+const INFO = {
+  flights:[
+    ["Vuelo de llegada","Martes 18 · 07:40 · Brussels Airlines SN3708 · BCN → BRU"],
+    ["Vuelo de salida","Sábado 22 · 18:15–20:15 · Ryanair FR2828 · Charleroi (CRL) → Reus (REU)"],
+  ],
+  hotel:["CityBox Brussels Centre Louise","Rue Dejoncker 53, 1060 Bruselas"],
+  reservas:[
+    ["Free Tour por Bruselas","Martes 18, 17:00–19:00 · Grand Place"],
+    ["Parlamento Europeo","Martes 18, 13:00 · Hemiciclo"],
+    ["Excursión a Ámsterdam","Jueves 20, 08:00 · Carrefour de l'Europe (~12h)"],
+    ["Excursión Dinant + Luxemburgo","Viernes 21, 08:00 · Carrefour de l'Europe (~12h)"],
+    ["Brujas y Gante","Miércoles 19 · por libre en tren, sin excursión"],
+  ],
+  tips:[
+    "Transporte público: STIB-MIVB (metro/tranvía/bus). App con horarios en tiempo real; pago sin contacto en validadores.",
+    "Trenes a Brujas/Gante: app/web SNCB-NMBS (belgiantrain.be). Ella (24) tiene 40% de descuento \"Youth -26\"; él (26) tarifa normal.",
+    "Flibco (Bruxelles-Midi ↔ Charleroi): comprad el billete con antelación en la app/web — siempre más barato que en el momento.",
+    "Free tour y excursiones: llevad el bono electrónico y llegad 10 min antes.",
+    "Efectivo útil para el mercadillo de las Marolles (solo cash).",
+    "Calzado cómodo: cada zona se recorre bastante a pie.",
+  ],
+};
+
+// ============================================================
+// RENDER
+// ============================================================
+const mainEl = document.getElementById("main");
+const tabbarEl = document.getElementById("tabbar");
+
+// ---------- Persisted settings (localStorage) ----------
+const LS_KEY = "bru26_settings_v1";
+function loadSettings(){
+  try{ return JSON.parse(localStorage.getItem(LS_KEY)) || {}; }catch(e){ return {}; }
+}
+function saveSettings(s){
+  try{ localStorage.setItem(LS_KEY, JSON.stringify(s)); }catch(e){}
+}
+let SETTINGS = Object.assign({ showPastDays:false, done:{} }, loadSettings());
+function setSetting(k,v){ SETTINGS[k]=v; saveSettings(SETTINGS); }
+
+// ---------- Today detection ----------
+function todayISO(){
+  const d = new Date();
+  const mm = String(d.getMonth()+1).padStart(2,"0");
+  const dd = String(d.getDate()).padStart(2,"0");
+  return `${d.getFullYear()}-${mm}-${dd}`;
+}
+const TODAY = todayISO();
+function dayHasPassed(day){ return day.iso && day.iso < TODAY; }
+function isToday(day){ return day.iso === TODAY; }
+
+// Pick initial active tab: today's trip day if we're mid-trip, otherwise Day 1.
+let active = (DAYS.find(d=>d.iso===TODAY) || DAYS.find(d=>d.key==="d1")).key;
+
+function svgPin(){
+  return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s7-7.5 7-12a7 7 0 1 0-14 0c0 4.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.3"/></svg>';
+}
+
+// ---------- Emoji flavor ----------
+const EMOJI_RULES = [
+  [/aeropuerto/i, "✈️"], [/tren /i, "🚆"], [/metro|tranvía/i, "🚇"], [/autobús|flibco/i, "🚌"],
+  [/taxi|uber/i, "🚕"], [/check-in|maletas|consigna/i, "🧳"], [/hotel/i, "🏨"],
+  [/comida|cena|desayuno/i, "🍽️"], [/chocolat/i, "🍫"], [/cerveza|leffe|delirium/i, "🍺"],
+  [/basílica|iglesia|catedral|capilla|corazón/i, "⛪"], [/castillo|gravensteen|ducal|palacio/i, "🏰"],
+  [/parque|jardín|leopold/i, "🌳"], [/puente/i, "🌉"], [/mercad/i, "🛍️"], [/museo/i, "🏛️"],
+  [/barco|canal/i, "🛥️"], [/mirador|vista|corniche/i, "📸"], [/parlamento/i, "🇪🇺"],
+  [/atomium/i, "⚛️"], [/free tour|tour a pie/i, "🚶"], [/plaza|place|markt|dam\b/i, "⛲"],
+  [/caminar/i, "🚶"], [/pis\b/i, "🚰"],
+];
+function emojiFor(s){
+  if(s.emoji) return s.emoji;
+  for(const [re, em] of EMOJI_RULES){ if(re.test(s.ti)) return em; }
+  return "📍";
+}
+function sectionEmoji(name){
+  if(/^Mañana/.test(name)) return "☀️ ";
+  if(/^Mediodía/.test(name)) return "🕛 ";
+  if(/^Tarde/.test(name)) return "🌇 ";
+  if(/^Atardecer/.test(name)) return "🌆 ";
+  if(/^Noche/.test(name)) return "🌙 ";
+  return "";
+}
+
+// ---------- Info modal (place photo + description) ----------
+let STOP_REGISTRY = [];
+const WIKI_LS_KEY = "bru26_wikicache_v1";
+let wikiCache = {};
+try{ wikiCache = JSON.parse(localStorage.getItem(WIKI_LS_KEY)) || {}; }catch(e){ wikiCache = {}; }
+function persistWikiCache(){
+  try{
+    const keys = Object.keys(wikiCache);
+    if(keys.length > 120){ delete wikiCache[keys[0]]; } // simple cap
+    localStorage.setItem(WIKI_LS_KEY, JSON.stringify(wikiCache));
+  }catch(e){ /* storage full or unavailable — ignore, in-memory cache still works this session */ }
+}
+const LOGISTICS_RE = /^(Caminar|Metro|Tren |Autobús|Check-in|Comida r[aá]pida|Desayuno|Aterrizaje|Recoger maletas|Vuelta al hotel|Salida del hotel|Salida en autob|Regreso en autob|Traslado al hotel|Autobús hacia)/i;
+function isLogistics(s){ return LOGISTICS_RE.test(s.ti) && !s.wiki; }
+
+let lastFetchHadNetworkError = false;
+async function fetchWiki(pair){
+  if(!pair) return null;
+  const key = pair.join("|");
+  if(wikiCache[key] !== undefined) return wikiCache[key];
+  const tries = [];
+  if(pair[0]) tries.push(["es", pair[0]]);
+  if(pair[1]) tries.push(["en", pair[1]]);
+  lastFetchHadNetworkError = false;
+  for(const [lang, title] of tries){
+    try{
+      const r = await fetch(`https://${lang}.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(title)}`, {cache:"force-cache"});
+      if(r.ok){
+        const j = await r.json();
+        if(j && j.extract && j.type !== "disambiguation"){
+          wikiCache[key] = j;
+          persistWikiCache();
+          return j;
+        }
+      }
+    }catch(e){ lastFetchHadNetworkError = true; /* offline, blocked by file:// sandbox, or no CORS */ }
+  }
+  // Deliberately NOT cached: a null result might just be a transient network
+  // problem (e.g. previewing outside real Safari), so every open/retry gets
+  // a fresh attempt instead of getting stuck on a cached failure.
+  return null;
+}
+
+const elModalBackdrop = document.getElementById("modalBackdrop");
+const elModalPhoto = document.getElementById("modalPhoto");
+const elModalScroll = document.getElementById("modalScroll");
+document.getElementById("modalClose").addEventListener("click", closeInfo);
+elModalBackdrop.addEventListener("click", (e)=>{
+  if(e.target === elModalBackdrop) closeInfo();
+  const retry = e.target.closest(".retry-link");
+  if(retry) openInfo(Number(retry.dataset.retryIdx));
+});
+
+function closeInfo(){ elModalBackdrop.classList.remove("open"); }
+
+async function openInfo(idx){
+  const s = STOP_REGISTRY[idx];
+  if(!s) return;
+  elModalBackdrop.classList.add("open");
+  elModalPhoto.innerHTML = s.wiki
+    ? `<div class="ph-spinner"><span></span></div>`
+    : `<div class="ph-fallback"><span class="letter">${(s.ti||"?").charAt(0)}</span></div>`;
+  const descHtml = (s.d && s.d.length) ? `<div class="modal-desc">${s.d.map(l=>`<p>${l}</p>`).join("")}</div>` : "";
+  const mapHtml = s.url ? `<a class="maplink" href="${s.url}" target="_blank" rel="noopener">${svgPin()} Ver en Google Maps</a>` : "";
+  elModalScroll.innerHTML = `<h3>${s.ti}</h3><div id="modalWikiSlot"></div>${descHtml}${mapHtml}`;
+  elModalScroll.scrollTop = 0;
+
+  if(s.wiki){
+    const data = await fetchWiki(s.wiki);
+    // Only apply if this stop is still the one open (avoid race if user taps another fast)
+    if(!elModalBackdrop.classList.contains("open")) return;
+    if(data){
+      const img = data.thumbnail && data.thumbnail.source;
+      elModalPhoto.innerHTML = img
+        ? `<img src="${img.replace(/\/\d+px-/, "/500px-")}" alt="">`
+        : `<div class="ph-fallback"><span class="letter">${(s.ti||"?").charAt(0)}</span></div>`;
+      const slot = document.getElementById("modalWikiSlot");
+      if(slot) slot.innerHTML = `<div class="modal-wiki">${data.extract}<span class="src">Fuente: Wikipedia</span></div>`;
+    } else {
+      const msg = lastFetchHadNetworkError
+        ? "No se pudo conectar a internet para cargar la foto."
+        : "No hay foto disponible para este sitio.";
+      elModalPhoto.innerHTML = `<div class="ph-fallback">
+        <span class="letter">${(s.ti||"?").charAt(0)}</span>
+        <span class="retry-msg">${msg}${lastFetchHadNetworkError ? ' <u class="retry-link" data-retry-idx="'+idx+'">Reintentar</u>' : ''}</span>
+      </div>`;
+    }
+  }
+}
+
+function renderTabbar(){
+  const visibleDays = DAYS.filter(d=> d.isInfo || SETTINGS.showPastDays || !dayHasPassed(d));
+  tabbarEl.innerHTML = visibleDays.map(d=>{
+    const label = d.isInfo ? "Info" : d.short;
+    const dot = d.isInfo ? "i" : d.key.replace("d","");
+    const todayCls = (!d.isInfo && isToday(d)) ? "today" : "";
+    return `<button data-key="${d.key}" class="${d.key===active?'active':''} ${todayCls}">
+      <span class="dot">${dot}</span><span class="lbl">${label}</span>
+    </button>`;
+  }).join("");
+  tabbarEl.querySelectorAll("button").forEach(b=>{
+    b.addEventListener("click", ()=>{ active=b.dataset.key; render(); });
+  });
+}
+
+function stopCard(s, uid){
+  const idx = STOP_REGISTRY.length;
+  STOP_REGISTRY.push(s);
+  const isDone = uid && SETTINGS.done[uid];
+  const hasInfo = !isLogistics(s);
+  const kindClass = s.kind==="metro" ? "metro" : s.kind==="reserved" ? "reserved" : "plain";
+  const chip = s.kind==="metro" ? '<span class="chip">🚇 Metro/Tranvía</span>' : s.kind==="reserved" ? '<span class="chip">🎫 Reservado</span>' : "";
+  const desc = (s.d && s.d.length) ? `<div class="desc">${s.d.map(l=>`<p>${l}</p>`).join("")}</div>` : "";
+  const link = s.url ? `<a class="maplink" href="${s.url}" target="_blank" rel="noopener">${svgPin()} Ver en Maps</a>` : "";
+  const emoji = emojiFor(s);
+  const infoAction = hasInfo ? `<div class="swipe-action action-info"><span class="ic">ⓘ</span><span>Info</span></div>` : "";
+  const doneAction = uid ? `<div class="swipe-action action-done"><span class="ic">${isDone?"↺":"✓"}</span><span>${isDone?"Desmarcar":"Hecho"}</span></div>` : "";
+  return `<div class="stop ${kindClass} ${isDone?'done':''}" data-idx="${hasInfo?idx:''}" data-uid="${uid||''}">
+    ${infoAction}${doneAction}
+    <div class="stop-content">
+      <div class="row1"><span class="emoji">${emoji}</span><span class="time">${s.t||""}</span><span class="title">${s.ti}</span>${chip}</div>
+      ${desc}${link}
+    </div>
+  </div>`;
+}
+
+function freeBlock(fb){
+  // fb: {t, ti, d:[...], subs:[{ti,d,url,wiki}]}
+  let html = `<div class="freeblock">
+    <div class="fb-ribbon">🕒 TIEMPO LIBRE${fb.t ? " · " + fb.t : ""}</div>
+    <div class="fb-title">${fb.ti}</div>`;
+  if(fb.d && fb.d.length) html += `<div class="fb-desc">${fb.d.map(l=>`<p>${l}</p>`).join("")}</div>`;
+  if(fb.subs && fb.subs.length){
+    html += `<div class="fb-subs">`;
+    fb.subs.forEach(sub=>{
+      const idx = STOP_REGISTRY.length;
+      STOP_REGISTRY.push(sub);
+      const emoji = emojiFor(sub);
+      const infoBtn = `<button class="fb-info-btn" data-idx="${idx}">i</button>`;
+      const link = sub.url ? `<a class="maplink sub" href="${sub.url}" target="_blank" rel="noopener">${svgPin()}</a>` : "";
+      html += `<div class="fb-sub-row">
+        <span class="emoji">${emoji}</span><span class="fb-sub-title">${sub.ti}</span>${infoBtn}${link}
+      </div>`;
+    });
+    html += `</div>`;
+  }
+  html += `</div>`;
+  return html;
+}
+
+function renderDay(day){
+  let html = `<div class="day-banner">
+    <div class="tag">${day.date}</div>
+    <h2>${day.title}</h2>
+    <p>${day.subtitle}</p>
+  </div>`;
+  html += `<div class="swipe-hint"><span class="arrows">⇠⇢</span> Desliza una parada: izquierda para marcarla hecha ✓, derecha para ver su información ⓘ</div>`;
+  if(day.topNote) html += `<div class="notebox"><p>${day.topNote}</p></div>`;
+  let counter = 0;
+  day.sections.forEach(sec=>{
+    html += `<div class="section-label">${sectionEmoji(sec.name)}${sec.name}</div>`;
+    sec.stops.forEach(s=>{
+      counter++;
+      if(s.free){ html += freeBlock(s); }
+      else{ html += stopCard(s, day.key + "-" + counter); }
+    });
+  });
+  if(day.note) html += `<div class="notebox"><p>${day.note}</p></div>`;
+  return html;
+}
+
+function renderInfo(){
+  let html = `<div class="day-banner">
+    <div class="tag">Información general</div>
+    <h2>Antes de salir</h2>
+    <p>Vuelos, alojamiento, reservas y consejos rápidos</p>
+  </div>`;
+  html += `<div class="info-block"><h3>Vuelos</h3>` +
+    INFO.flights.map(f=>`<div class="info-row"><b>${f[0]}:</b> ${f[1]}</div>`).join("") + `</div>`;
+  html += `<div class="info-block"><h3>Alojamiento</h3>` +
+    INFO.hotel.map(l=>`<div class="info-row">${l}</div>`).join("") + `</div>`;
+  html += `<div class="info-block"><h3>Reservas</h3>` +
+    INFO.reservas.map(r=>`<div class="info-row"><b>${r[0]}:</b> ${r[1]}</div>`).join("") + `</div>`;
+  html += `<div class="notebox">${INFO.tips.map(t=>`<p>${t}</p>`).join("")}</div>`;
+  html += `<div class="info-block"><h3>Ajustes</h3>
+    <label class="settings-row">
+      <span>Mostrar todos los días (incluidos los que ya pasaron)</span>
+      <input type="checkbox" id="chkShowPast" ${SETTINGS.showPastDays?"checked":""}>
+    </label>
+    <button class="settings-btn" id="btnResetDone">Reiniciar paradas marcadas como visitadas</button>
+    <p class="settings-note">Si abres la app mediante el Atajo de iOS (data:text/html), las paradas marcadas como hechas y las fotos guardadas se reinician cada vez que la vuelves a abrir — es normal, no es un fallo.</p>
+  </div>`;
+  return html;
+}
+
+function render(){
+  const day = DAYS.find(d=>d.key===active);
+  STOP_REGISTRY = [];
+  mainEl.innerHTML = day.isInfo ? renderInfo() : renderDay(day);
+  mainEl.scrollTop = 0;
+  renderTabbar();
+  if(day.isInfo){
+    const chk = document.getElementById("chkShowPast");
+    if(chk) chk.addEventListener("change", ()=>{ setSetting("showPastDays", chk.checked); renderTabbar(); });
+    wireResetButton();
+  }
+}
+
+let resetArmed = false;
+let resetTimer = null;
+function wireResetButton(){
+  const btn = document.getElementById("btnResetDone");
+  if(!btn) return;
+  resetArmed = false;
+  btn.addEventListener("click", ()=>{
+    if(!resetArmed){
+      resetArmed = true;
+      btn.textContent = "¿Seguro? Toca otra vez para confirmar";
+      btn.classList.add("danger");
+      clearTimeout(resetTimer);
+      resetTimer = setTimeout(()=>{
+        resetArmed = false;
+        btn.textContent = "Reiniciar paradas marcadas como visitadas";
+        btn.classList.remove("danger");
+      }, 3500);
+    } else {
+      clearTimeout(resetTimer);
+      resetArmed = false;
+      setSetting("done", {});
+      render();
+    }
+  });
+}
+
+// ---------- Tap on emoji = quick info (secondary affordance) ----------
+mainEl.addEventListener("click", (e)=>{
+  const fbBtn = e.target.closest(".fb-info-btn");
+  if(fbBtn){ openInfo(Number(fbBtn.dataset.idx)); return; }
+  const emojiTap = e.target.closest(".stop .emoji");
+  if(emojiTap){
+    const card = emojiTap.closest(".stop");
+    if(card && card.dataset.idx !== "") openInfo(Number(card.dataset.idx));
+  }
+});
+
+// ---------- Swipe left = toggle done · swipe right = open info ----------
+function toggleDoneOnCard(card){
+  const uid = card.dataset.uid;
+  if(!uid) return;
+  const nowDone = !SETTINGS.done[uid];
+  SETTINGS.done[uid] = nowDone;
+  saveSettings(SETTINGS);
+  card.classList.toggle("done", nowDone);
+  const doneAction = card.querySelector(".action-done");
+  if(doneAction) doneAction.innerHTML = `<span class="ic">${nowDone?"↺":"✓"}</span><span>${nowDone?"Desmarcar":"Hecho"}</span>`;
+}
+
+let sw = null; // active swipe state
+mainEl.addEventListener("touchstart", (e)=>{
+  const card = e.target.closest(".stop");
+  if(!card) return;
+  const t = e.touches[0];
+  sw = { card, startX:t.clientX, startY:t.clientY, dx:0, locked:null };
+  card.classList.add("dragging");
+}, {passive:true});
+
+mainEl.addEventListener("touchmove", (e)=>{
+  if(!sw) return;
+  const t = e.touches[0];
+  const dx = t.clientX - sw.startX;
+  const dy = t.clientY - sw.startY;
+  if(sw.locked === null){
+    if(Math.abs(dx) > 8 || Math.abs(dy) > 8) sw.locked = Math.abs(dx) > Math.abs(dy) ? "h" : "v";
+  }
+  if(sw.locked === "h"){
+    e.preventDefault();
+    const hasInfo = sw.card.dataset.idx !== "";
+    const hasDone = !!sw.card.dataset.uid;
+    let clamped = dx;
+    if(clamped > 0 && !hasInfo) clamped = 0;
+    if(clamped < 0 && !hasDone) clamped = 0;
+    clamped = Math.max(-92, Math.min(92, clamped));
+    sw.dx = clamped;
+    const content = sw.card.querySelector(".stop-content");
+    if(content) content.style.transform = `translateX(${clamped}px)`;
+    const infoAction = sw.card.querySelector(".action-info");
+    const doneAction = sw.card.querySelector(".action-done");
+    if(infoAction) infoAction.style.opacity = String(Math.max(0, clamped) / 80);
+    if(doneAction) doneAction.style.opacity = String(Math.max(0, -clamped) / 80);
+  }
+}, {passive:false});
+
+mainEl.addEventListener("touchend", ()=>{
+  if(!sw) return;
+  const card = sw.card;
+  const dx = sw.dx;
+  const THRESH = 58;
+  card.classList.remove("dragging");
+  if(sw.locked === "h" && Math.abs(dx) > THRESH){
+    if(dx < 0) toggleDoneOnCard(card);
+    else{
+      const idx = card.dataset.idx;
+      if(idx !== "") openInfo(Number(idx));
+    }
+  }
+  const content = card.querySelector(".stop-content");
+  if(content) content.style.transform = "translateX(0)";
+  const infoAction = card.querySelector(".action-info");
+  const doneAction = card.querySelector(".action-done");
+  if(infoAction) infoAction.style.opacity = 0;
+  if(doneAction) doneAction.style.opacity = 0;
+  sw = null;
+}, {passive:true});
+
+render();
+</script>
+</body>
+</html>
