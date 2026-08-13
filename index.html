@@ -15,6 +15,18 @@
 <link rel="icon" href="favicon-16.png" sizes="16x16" type="image/png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png" sizes="180x180">
 <link rel="manifest" href="manifest.json">
+<script>
+// Set the theme before first paint (avoids a flash of the wrong theme).
+// Kept in sync later by the toggle button in the header.
+(function(){
+  try{
+    var s = JSON.parse(localStorage.getItem("bru26_settings_v1") || "{}");
+    var theme = (s.theme === "light" || s.theme === "dark") ? s.theme
+      : (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+    document.documentElement.setAttribute("data-theme", theme);
+  }catch(e){}
+})();
+</script>
 <style>
   :root{
     --cream:#F7F2EA;
@@ -57,6 +69,12 @@
   header .eyebrow{ font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--gold-soft); font-weight:700;}
   header h1{ font-family:Georgia, "Times New Roman", serif; font-size:18px; margin:1px 0 0; font-weight:700; line-height:1.15;}
   header .sub{ font-size:11.5px; color:#EADFCB; margin-top:2px; font-style:italic;}
+  .theme-toggle{
+    margin-left:auto; flex-shrink:0; width:34px; height:34px; border-radius:50%; border:none;
+    background:rgba(255,255,255,.14); color:#fff; font-size:16px; display:flex; align-items:center;
+    justify-content:center; font-family:inherit; line-height:1;
+  }
+  .theme-toggle:active{ background:rgba(255,255,255,.26); }
 
   /* ---------- DAY PILLS ---------- */
   nav.pills{
@@ -234,35 +252,37 @@
   .settings-btn.danger{ background:var(--burgundy); color:#fff; border-color:var(--burgundy-deep);}
   .settings-note{ margin:10px 0 0; font-size:11.5px; color:var(--grey); line-height:1.5; font-style:italic;}
 
-  /* ---------- DARK MODE (follows system setting) ----------
+  /* ---------- DARK MODE ----------
+     Driven by [data-theme] on <html>, set by the toggle button in the header
+     (falls back to the system setting — see the inline script in <head>).
      Placed last so these overrides win the cascade over the base rules above. */
-  @media (prefers-color-scheme: dark){
-    :root{
-      --cream:#181210;
-      --card:#251C17;
-      --gold:#C7A06B;
-      --gold-soft:#3B2C1C;
-      --ink:#F1E9DD;
-      --grey:#B2A594;
-      --metro:#7EC2EE;
-      --metro-soft:#1A3547;
-      --reserved:#8FCB8A;
-      --reserved-soft:#213821;
-      --line:#3A2E27;
-      /* burgundy stays the brand color for buttons/backgrounds; wherever it was
-         used as *text* on what is now a dark surface, use warm gold instead —
-         keeps the accent legible without turning headings/labels reddish-pink */
-      --burgundy-text:#D9A854;
-      --burgundy-text-deep:#C0883E;
-    }
-    .notebox, .modal-wiki, .info-row, .stop .desc, .modal-desc p, .fb-desc p, .settings-row{ color:var(--ink); }
-    .info-block h3{ color:var(--burgundy-text-deep); }
-    .freeblock{ background:repeating-linear-gradient(135deg, #221A14 0 10px, #1D1712 10px 20px); }
-    .fb-sub-row{ border-bottom-color:#4A3B27; }
-    .fb-info-btn{ background:var(--card); color:var(--gold); }
-    .settings-btn{ background:var(--card); border-color:var(--burgundy-text); color:var(--burgundy-text); }
-    .tabbar{ background:rgba(24,18,16,.90); }
+  :root[data-theme="dark"]{
+    --cream:#181210;
+    --card:#251C17;
+    --gold:#C7A06B;
+    --gold-soft:#3B2C1C;
+    --ink:#F1E9DD;
+    --grey:#B2A594;
+    --metro:#7EC2EE;
+    --metro-soft:#1A3547;
+    --reserved:#8FCB8A;
+    --reserved-soft:#213821;
+    --line:#3A2E27;
+    /* burgundy stays the brand color for buttons/backgrounds; wherever it was
+       used as *text* on what is now a dark surface, use warm gold instead —
+       keeps the accent legible without turning headings/labels reddish-pink */
+    --burgundy-text:#D9A854;
+    --burgundy-text-deep:#C0883E;
   }
+  :root[data-theme="dark"] .notebox, :root[data-theme="dark"] .modal-wiki, :root[data-theme="dark"] .info-row,
+  :root[data-theme="dark"] .stop .desc, :root[data-theme="dark"] .modal-desc p, :root[data-theme="dark"] .fb-desc p,
+  :root[data-theme="dark"] .settings-row{ color:var(--ink); }
+  :root[data-theme="dark"] .info-block h3{ color:var(--burgundy-text-deep); }
+  :root[data-theme="dark"] .freeblock{ background:repeating-linear-gradient(135deg, #221A14 0 10px, #1D1712 10px 20px); }
+  :root[data-theme="dark"] .fb-sub-row{ border-bottom-color:#4A3B27; }
+  :root[data-theme="dark"] .fb-info-btn{ background:var(--card); color:var(--gold); }
+  :root[data-theme="dark"] .settings-btn{ background:var(--card); border-color:var(--burgundy-text); color:var(--burgundy-text); }
+  :root[data-theme="dark"] .tabbar{ background:rgba(24,18,16,.90); }
 </style>
 </head>
 <body>
@@ -274,6 +294,7 @@
       <h1>Bruselas &amp; Ámsterdam</h1>
       <div class="sub">18–22 de agosto de 2026</div>
     </div>
+    <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema"></button>
   </header>
   <main id="main"></main>
   <button class="fab-today" id="fabToday">📍 Ir a hoy</button>
@@ -526,8 +547,33 @@ function loadSettings(){
 function saveSettings(s){
   try{ localStorage.setItem(LS_KEY, JSON.stringify(s)); }catch(e){}
 }
-let SETTINGS = Object.assign({ showPastDays:false, done:{} }, loadSettings());
+let SETTINGS = Object.assign({ showPastDays:false, done:{}, theme:"system" }, loadSettings());
 function setSetting(k,v){ SETTINGS[k]=v; saveSettings(SETTINGS); }
+
+// ---------- Theme (auto / claro / oscuro) ----------
+const THEME_ORDER = ["system", "light", "dark"];
+const THEME_ICON = { system:"🌗", light:"☀️", dark:"🌙" };
+const THEME_LABEL = { system:"Tema: automático (según el sistema)", light:"Tema: claro", dark:"Tema: oscuro" };
+const elThemeToggle = document.getElementById("themeToggle");
+function effectiveTheme(){
+  if(SETTINGS.theme === "light" || SETTINGS.theme === "dark") return SETTINGS.theme;
+  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+}
+function applyTheme(){
+  document.documentElement.setAttribute("data-theme", effectiveTheme());
+  elThemeToggle.textContent = THEME_ICON[SETTINGS.theme];
+  elThemeToggle.title = THEME_LABEL[SETTINGS.theme];
+}
+elThemeToggle.addEventListener("click", ()=>{
+  const next = THEME_ORDER[(THEME_ORDER.indexOf(SETTINGS.theme) + 1) % THEME_ORDER.length];
+  setSetting("theme", next);
+  applyTheme();
+});
+// Live-update when the OS theme changes, but only while following it.
+window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", ()=>{
+  if(SETTINGS.theme === "system") applyTheme();
+});
+applyTheme();
 
 // ---------- Today detection ----------
 function todayISO(){
