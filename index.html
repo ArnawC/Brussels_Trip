@@ -357,22 +357,23 @@ const DAYS = [
   sections:[
     {name:"Mañana", stops:[
       {t:"07:40", ti:"Aterrizaje en el Aeropuerto de Bruselas (BRU)", d:["Contad 30–40 min para pasaportes y maletas."], url:pt(P.bru)},
-      {t:"≈08:30", ti:"Traslado al hotel en tren + metro/tranvía", kind:"metro", d:["Tren Airport → Bruxelles-Central (~20 min).","Tranvía 92/93 o metro L2/L6 hasta Louise (~10-15 min) + 5 min a pie.","Alternativa: taxi/Uber directo (~25-30 min)."], url:dir([P.bru,P.hotel],"transit")},
+      {t:"≈08:30", ti:"Traslado al hotel en bus + metro/tranvía", kind:"metro", d:["Bus STIB 12 (o 21) Aeropuerto → Schuman (~30 min) — mismo billete STIB normal, mucho más barato que el tren con suplemento Diabolo.","Metro/tranvía desde Schuman hasta Louise (~15 min, con un transbordo).","Alternativa: taxi/Uber directo (~25-30 min, más caro)."], url:dir([P.bru,P.hotel],"transit")},
       {t:"≈09:30", ti:"Check-in / dejar maletas en el hotel", d:["Check-in desde las 15:00, pero hay consigna de maletas."], url:pt(P.hotel)},
       {t:"10:00", ti:"Caminar hacia Grand Place", d:["20-25 min a pie por Avenue Louise."], url:dir([P.hotel,P.grandplace],"walking")},
       {t:"10:25–10:50", ti:"Galerías Reales de San Huberto", d:["Galería del siglo XIX, entrada libre. Chocolaterías Neuhaus, Corné."], url:pt(P.saint_hubert), wiki:["Galerías_Reales_de_San_Huberto","Royal_Galleries_of_Saint-Hubert"], img:"img/saint_hubert.jpg"},
-      {t:"11:00–11:45", ti:"Rue Neuve", d:["La calle comercial más concurrida de Bruselas."], url:pt(P.rueneuve), wiki:[null,"Rue_Neuve,_Brussels"], img:"img/rueneuve.jpg"},
-      {t:"11:55", ti:"Comida rápida cerca de Rue Neuve", d:["Algo ligero — 20-25 min de caminata hasta el Parlamento."]},
+      {t:"11:00–11:35", ti:"Rue Neuve", d:["La calle comercial más concurrida de Bruselas."], url:pt(P.rueneuve), wiki:[null,"Rue_Neuve,_Brussels"], img:"img/rueneuve.jpg"},
+      {t:"11:45–12:15", ti:"Comida rápida cerca de Rue Neuve", d:["Algo ligero — 20-25 min de caminata hasta el Parlamento."]},
       {t:"12:15", ti:"Caminar hacia Schuman (Barrio Europeo)", d:["20-25 min a pie por Rue de la Loi."], url:dir([P.grandplace,P.parlamento],"walking")},
     ]},
     {name:"Mediodía — Parlamento Europeo", stops:[
       {t:"13:00–14:00", ti:"Parlamento Europeo — visita al Hemiciclo", kind:"reserved", d:["Visita reservada a las 13:00. Llevad el DNI/pasaporte."], url:pt(P.parlamento), wiki:["Parlamento_Europeo","European_Parliament"], img:"img/parlamento.jpg"},
       {t:"14:00–14:20", ti:"Muro de Berlín (tramo conservado)", d:["Fragmento original, pocos minutos de la salida del Parlamento."], url:pt(P.muro_berlin), wiki:[null,"Berlin_Wall"], img:"img/muro_berlin.jpg"},
       {t:"14:20–14:45", ti:"Berlaymont + Parque Leopold", d:["Sede de la Comisión Europea por fuera, y paseo tranquilo por el parque."], url:pt(P.berlaymont), wiki:["Edificio_Berlaymont","Berlaymont_building"], img:"img/berlaymont.jpg"},
+      {t:"≈14:45–15:15", ti:"Cincuentenario + Arco del Triunfo", d:["8-10 min a pie desde Berlaymont/Parque Leopold — ya que estáis tan cerca, mejor verlo hoy que dar un rodeo el sábado.","Entrada libre. Mirador gratuito en el Museo de Historia Militar."], url:pt(P.cinquantenaire), wiki:["Parque_del_Cincuentenario","Parc_du_Cinquantenaire"], img:"img/cinquantenaire.jpg"},
     ]},
     {name:"Tarde", stops:[
-      {t:"15:00–15:35", ti:"Caminar de vuelta a Grand Place", d:["32 min a pie por Rue Belliard, cruzando el Parque de Bruselas."], url:dir([P.parc_leopold,P.grandplace],"walking")},
-      {t:"15:35–16:45", ti:"Tiempo libre cerca de Grand Place", d:["Pausa con calma en una terraza antes del free tour."], wiki:["Grand-Place","Grand-Place"], img:"img/grandplace.jpg"},
+      {t:"15:15–15:55", ti:"Caminar de vuelta a Grand Place", d:["35-40 min a pie desde el Cincuentenario, cruzando el Parque de Bruselas.","Alternativa más rápida: metro Merode → Trône (~10 min) + 10 min a pie."], url:dir([P.cinquantenaire,P.grandplace],"walking")},
+      {t:"15:55–16:45", ti:"Tiempo libre cerca de Grand Place", d:["Pausa con calma en una terraza antes del free tour."], wiki:["Grand-Place","Grand-Place"], img:"img/grandplace.jpg"},
     ]},
     {name:"Atardecer — Free Tour", stops:[
       {t:"17:00–19:00", ti:"Free Tour por Bruselas", kind:"reserved", d:["Punto de encuentro: Grand Place, frente al Ayuntamiento. 2h.","Recorrido: Grand Place → Manneken Pis → Bolsa (Beer World) → murales de cómic → Sablon → Palacio de Justicia → Plaza Real → Catedral → Mont des Arts.","Estas paradas ya quedan cubiertas por el guía."], url:pt(P.grandplace), wiki:["Grand-Place","Grand-Place"], img:"img/grandplace.jpg"},
@@ -499,22 +500,20 @@ const DAYS = [
       {t:"07:50–08:20", ti:"Basílica del Sagrado Corazón", d:["5ª iglesia más grande del mundo. Templo gratis; cúpula/terraza de pago."], url:pt(P.koekelberg), wiki:["Basílica_del_Sagrado_Corazón_(Bruselas)","National_Basilica_of_the_Sacred_Heart"], img:"img/koekelberg.jpg"},
       {t:"08:30", ti:"Metro (línea 6) hacia Heysel", kind:"metro", d:["~15 min, sin cambios."], url:dir([P.koekelberg,P.atomium],"transit")},
       {t:"08:45–09:25", ti:"Atomium (vista exterior)", d:["Impresiona igual desde el parque de alrededor."], url:pt(P.atomium), wiki:["Atomium","Atomium"], img:"img/atomium.jpg"},
-      {t:"09:40", ti:"Metro/tranvía hacia el Cincuentenario", kind:"metro", d:["~35-40 min con transbordo."], url:dir([P.atomium,P.cinquantenaire],"transit")},
-      {t:"10:20–10:45", ti:"Cincuentenario + Arco del Triunfo", d:["Entrada libre. Mirador gratuito en el Museo de Historia Militar."], url:pt(P.cinquantenaire), wiki:["Parque_del_Cincuentenario","Parc_du_Cinquantenaire"], img:"img/cinquantenaire.jpg"},
-      {t:"11:00", ti:"Metro/tranvía hacia Puerta de Halle", kind:"metro", d:["~30-35 min con transbordo."], url:dir([P.cinquantenaire,P.porte_hal],"transit")},
-      {t:"11:35–12:00", ti:"Puerta de Halle", d:["Última puerta de la muralla medieval. Museo interior de pago."], url:pt(P.porte_hal), wiki:["Puerta_de_Halle","Halle_Gate"], img:"img/porte_hal.jpg"},
-      {t:"12:10–12:55", ti:"Mercadillo de las Marolles", d:["Antigüedades al aire libre, hasta las 14:00. Solo efectivo."], url:pt(P.marolles), wiki:[null,"Place_du_Jeu_de_Balle"], img:"img/marolles.jpg"},
-      {t:"13:05–13:30", ti:"Grand Sablon + Petit Sablon", d:["Chocolaterías, anticuarios y jardín con 48 estatuas de bronce."], url:pt(P.sablon), wiki:[null,"Sablon,_Brussels"], img:"img/sablon.jpg"},
+      {t:"≈09:25", ti:"Metro hacia Puerta de Halle", kind:"metro", d:["Directo por la línea 6, sin transbordo (~20-25 min) — el Cincuentenario ya no está en el camino, se ve el Día 1."], url:dir([P.atomium,P.porte_hal],"transit")},
+      {t:"09:50–10:25", ti:"Puerta de Halle", d:["Última puerta de la muralla medieval. Museo interior de pago (OPCIONAL, ~€10)."], url:pt(P.porte_hal), wiki:["Puerta_de_Halle","Halle_Gate"], img:"img/porte_hal.jpg"},
+      {t:"10:35–11:35", ti:"Mercadillo de las Marolles", d:["Antigüedades al aire libre, hasta las 14:00. Solo efectivo."], url:pt(P.marolles), wiki:[null,"Place_du_Jeu_de_Balle"], img:"img/marolles.jpg"},
+      {t:"11:45–12:35", ti:"Grand Sablon + Petit Sablon", d:["Chocolaterías, anticuarios y jardín con 48 estatuas de bronce."], url:pt(P.sablon), wiki:[null,"Sablon,_Brussels"], img:"img/sablon.jpg"},
     ]},
     {name:"Mediodía — Traslado al aeropuerto", stops:[
-      {t:"13:30", ti:"Caminar al hotel", d:["12-15 min a pie desde Sablon."], url:dir([P.sablon,P.hotel],"walking")},
-      {t:"13:45–14:15", ti:"Comida rápida y recoger maletas", d:["Algo ligero — sin margen para comida larga."]},
-      {t:"14:15", ti:"Caminar a Bruxelles-Midi", d:["18-20 min a pie."], url:dir([P.hotel,P.midi],"walking")},
+      {t:"12:35", ti:"Caminar al hotel", d:["12-15 min a pie desde Sablon."], url:dir([P.sablon,P.hotel],"walking")},
+      {t:"12:50–13:50", ti:"Comida con calma y recoger maletas", d:["Ya no hace falta que sea rápida — con el rodeo del Cincuentenario fuera del día, hay margen de sobra hasta el Flibco."]},
+      {t:"13:50", ti:"Caminar a Bruxelles-Midi", d:["18-20 min a pie."], url:dir([P.hotel,P.midi],"walking")},
       {t:"≈14:45", ti:"Autobús Flibco a Charleroi", kind:"metro", d:["~1h. Comprad el billete con antelación en la app/web.","Llegada al aeropuerto ≈15:45, 15 min antes del objetivo 16:00 (vuelo 18:15, 2,5h reales de colchón)."], url:dir([P.midi,P.crl],"driving")},
       {t:"16:00", ti:"Aeropuerto de Charleroi (CRL)", d:["Facturación y seguridad antes del vuelo FR2828 a Reus (18:15)."], url:pt(P.crl)},
     ]},
   ],
-  note:"Día con menos margen del viaje. Si vais lentos, orden para recortar: 1) Puerta de Halle, 2) acortar Marolles, 3) saltar de Cincuentenario al hotel directamente."
+  note:"Día con más margen que antes: al ver el Cincuentenario el Día 1, aquí ya no hace falta el rodeo en metro que antes obligaba a recortar Puerta de Halle. Si aun así vais lentos, acortad primero la comida antes que las visitas."
 },
 ];
 
