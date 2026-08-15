@@ -339,6 +339,7 @@ const P = {
   lux_placedarmes:[49.610900,6.129400], lux_adolphe:[49.605300,6.122800], lux_pfaffenthal:[49.615500,6.130700],
 };
 function pt(p){ return `https://www.google.com/maps/search/?api=1&query=${p[0]},${p[1]}`; }
+function ptAddr(addr){ return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(addr)}`; }
 function dir(points, mode){
   const o = points[0], d = points[points.length-1], mid = points.slice(1,-1);
   let u = `https://www.google.com/maps/dir/?api=1&origin=${o[0]},${o[1]}&destination=${d[0]},${d[1]}&travelmode=${mode||"walking"}`;
@@ -523,6 +524,10 @@ const INFO = {
     ["Vuelo de salida","Sábado 22 · 18:15–20:15 · Ryanair FR2828 · Charleroi (CRL) → Reus (REU)"],
   ],
   hotel:["CityBox Brussels Centre Louise","Rue Dejoncker 53, 1060 Bruselas"],
+  comida:[
+    {name:"Carrefour Express (Place Stéphanie)", desc:"Chaussée de Charleroi 3, 1060 Saint-Gilles — a 2 min del hotel. Para desayuno, picoteo o algo rápido a cualquier hora.", url:ptAddr("Carrefour Express, Chaussée de Charleroi 3, 1060 Saint-Gilles, Belgium")},
+    {name:"La Vérité Si Je Mange", desc:"Chaussée de Charleroi 45, 1060 Saint-Gilles — sandwichería/traiteur. Lu-Vi 6:00-16:00, Sáb 8:00-16:00, cerrado domingo. Solo vale para desayuno o comida — para cenar no sirve (cierra a las 16:00 y las cenas del viaje no caen cerca del hotel).", url:ptAddr("La Vérité Si Je Mange, Chaussée de Charleroi 45, 1060 Saint-Gilles, Belgium")},
+  ],
   reservas:[
     ["Free Tour por Bruselas","Martes 18, 17:00–19:00 · Grand Place"],
     ["Parlamento Europeo","Martes 18, 13:00 · Hemiciclo"],
@@ -862,6 +867,8 @@ function renderInfo(){
     INFO.flights.map(f=>`<div class="info-row"><b>${f[0]}:</b> ${f[1]}</div>`).join("") + `</div>`;
   html += `<div class="info-block"><h3>Alojamiento</h3>` +
     INFO.hotel.map(l=>`<div class="info-row">${l}</div>`).join("") + `</div>`;
+  html += `<div class="info-block"><h3>Comida cerca del hotel</h3>` +
+    INFO.comida.map(c=>`<div class="info-row"><b>${c.name}:</b> ${c.desc}${c.url ? ` <a class="tip-link" href="${c.url}" target="_blank" rel="noopener">Ver en Maps →</a>` : ""}</div>`).join("") + `</div>`;
   html += `<div class="info-block"><h3>Reservas</h3>` +
     INFO.reservas.map(r=>`<div class="info-row"><b>${r[0]}:</b> ${r[1]}</div>`).join("") + `</div>`;
   html += `<div class="notebox">${INFO.tips.map(t=>{
