@@ -331,10 +331,12 @@ const P = {
   gent_vrijdagmarkt:[51.056300,3.724000],
   amsterdam:[52.373169,4.892839],
   ams_dam:[52.373169,4.892839], ams_wallen:[52.374362,4.899431], ams_nieuwmarkt:[52.372442,4.900253],
-  ams_negenstraatjes:[52.370800,4.885900],
+  ams_negenstraatjes:[52.370800,4.885900], ams_bloemenmarkt:[52.366950,4.891410],
+  ams_museumplein:[52.357262,4.881602], ams_vondelpark:[52.358000,4.868000],
   dinant_ciudadela:[50.260300,4.910600], dinant_mosa:[50.259700,4.911800], dinant_sax:[50.260600,4.911200],
+  dinant_colegiata:[50.261012,4.912000],
   lux_corniche:[49.610700,6.135200], lux_bock:[49.611300,6.135900], lux_grund:[49.608800,6.132900],
-  lux_placedarmes:[49.610900,6.129400],
+  lux_placedarmes:[49.610900,6.129400], lux_adolphe:[49.605300,6.122800], lux_pfaffenthal:[49.615500,6.130700],
 };
 function pt(p){ return `https://www.google.com/maps/search/?api=1&query=${p[0]},${p[1]}`; }
 function dir(points, mode){
@@ -430,12 +432,15 @@ const DAYS = [
       {t:"≈11:30", ti:"Llegada + paseo en barco (1h)", kind:"reserved", d:["Canales Herengracht, Keizersgracht, Prinsengracht, Jordaan, Ana Frank."], wiki:["Canales_de_Ámsterdam","Canals_of_Amsterdam"], img:"img/ams_canales.jpg"},
     ]},
     {name:"Tarde", stops:[
-      {t:"≈12:30–16:00", ti:"Tiempo libre en Ámsterdam (3h30)", free:true, d:["Rijksmuseum/Ana Frank requieren entrada anticipada — reservad antes de salir de Bruselas si os interesa."],
+      {t:"≈12:30–16:00", ti:"Tiempo libre en Ámsterdam (3h30)", free:true, d:["Rijksmuseum/Ana Frank requieren entrada anticipada — reservad antes de salir de Bruselas si os interesa.","Aprovechad este rato también para comer algo — no hay parada de comida programada hasta la vuelta a Bruselas."],
         subs:[
           {ti:"Plaza Dam", url:pt(P.ams_dam), wiki:["Plaza_Dam","Dam_Square"], img:"img/ams_dam.jpg"},
           {ti:"Barrio Rojo (De Wallen)", url:pt(P.ams_wallen), wiki:["De_Wallen","De_Wallen"], img:"img/ams_wallen.jpg"},
           {ti:"Nieuwmarkt", url:pt(P.ams_nieuwmarkt), wiki:["Nieuwmarkt","Nieuwmarkt,_Amsterdam"], img:"img/ams_nieuwmarkt.jpg"},
           {ti:"Nueve Calles (De Negen Straatjes)", url:pt(P.ams_negenstraatjes), wiki:[null,"Negen_Straatjes"], img:"img/ams_negenstraatjes.jpg"},
+          {ti:"Bloemenmarkt (mercado flotante de flores)", url:pt(P.ams_bloemenmarkt), wiki:[null,"Bloemenmarkt"], img:"img/ams_bloemenmarkt.jpg"},
+          {ti:"Museumplein (Rijksmuseum + Van Gogh Museum por fuera)", url:pt(P.ams_museumplein), wiki:[null,"Museumplein"], img:"img/ams_museumplein.jpg"},
+          {ti:"Vondelpark (algo más lejos, si sobra tiempo)", url:pt(P.ams_vondelpark), wiki:[null,"Vondelpark"], img:"img/ams_vondelpark.jpg"},
         ]},
       {t:"por la tarde", ti:"Regreso en autobús a Bruselas", d:["~3h30. Excursión de ~12h en total desde las 8:00."]},
     ]},
@@ -453,8 +458,9 @@ const DAYS = [
     {name:"Mañana", stops:[
       {t:"≈07:30", ti:"Hacia el punto de encuentro", d:["Carrefour de l'Europe: 20 min a pie."], url:dir([P.hotel,P.carrefoureuropa],"walking")},
       {t:"08:00", ti:"Autobús hacia Dinant", kind:"reserved", d:["Colegiata de Notre-Dame, Casa de Adolphe Sax, Maison Leffe."], url:pt(P.carrefoureuropa), wiki:["Dinant","Dinant"], img:"img/dinant_town.jpg"},
-      {t:"≈10:30–11:30", ti:"Tiempo libre en Dinant", free:true, d:["El guía ya señala la colegiata y la Casa de Adolphe Sax desde el bus — con este rato podéis acercaros por vuestra cuenta."],
+      {t:"≈10:30–11:30", ti:"Tiempo libre en Dinant", free:true, d:["El guía ya señala la colegiata y la Casa de Adolphe Sax desde el bus — con este rato podéis acercaros por vuestra cuenta.","Es un rato corto — no da para pararse a comer aquí, eso será en Luxemburgo."],
         subs:[
+          {ti:"Colegiata de Notre-Dame de Dinant", url:pt(P.dinant_colegiata), wiki:[null,"Collegiate_Church_of_Our_Lady,_Dinant"], img:"img/dinant_colegiata.jpg"},
           {ti:"Ciudadela de Dinant (mirador + teleférico, de pago)", url:pt(P.dinant_ciudadela), wiki:["Ciudadela_de_Dinant","Citadel_of_Dinant"], img:"img/dinant_ciudadela.jpg"},
           {ti:"Paseo junto al río Mosa", url:pt(P.dinant_mosa), wiki:[null,"Meuse"], img:"img/dinant_mosa.jpg"},
           {ti:"Casa de Adolphe Sax (exterior)", url:pt(P.dinant_sax), wiki:["Adolphe_Sax","Adolphe_Sax"], img:"img/dinant_sax.jpg"},
@@ -465,12 +471,14 @@ const DAYS = [
       {t:"≈13:00", ti:"Tour a pie por Luxemburgo", kind:"reserved", d:["Palacio Ducal, Hôtel de Ville, catedral de Notre-Dame."], wiki:["Palacio_Gran_Ducal_de_Luxemburgo","Grand_Ducal_Palace,_Luxembourg"], img:"img/lux_palace.jpg"},
     ]},
     {name:"Tarde", stops:[
-      {t:"≈14:00–16:30", ti:"Tiempo libre en Luxemburgo", free:true, d:["El tour a pie ya cubre el Palacio Ducal, Hôtel de Ville y la catedral — este rato es para explorar los miradores y el Grund."],
+      {t:"≈14:00–16:30", ti:"Tiempo libre en Luxemburgo", free:true, d:["El tour a pie ya cubre el Palacio Ducal, Hôtel de Ville y la catedral — este rato es para explorar los miradores y el Grund.","Este es el momento del día para comer con calma — Place d'Armes tiene varias terrazas."],
         subs:[
           {ti:"Chemin de la Corniche (\"el balcón más bonito de Europa\")", url:pt(P.lux_corniche), img:"img/lux_corniche.jpg"},
           {ti:"Casemates du Bock (fortificaciones, exterior gratis)", url:pt(P.lux_bock), wiki:[null,"Bock_(Luxembourg)"], img:"img/lux_bock.jpg"},
           {ti:"Barrio del Grund (junto al río Alzette)", url:pt(P.lux_grund), img:"img/lux_grund.jpg"},
           {ti:"Place d'Armes (centro, terrazas)", url:pt(P.lux_placedarmes), wiki:[null,"Place_d'Armes_(Luxembourg)"], img:"img/lux_placedarmes.jpg"},
+          {ti:"Puente Adolphe", url:pt(P.lux_adolphe), wiki:[null,"Adolphe_Bridge"], img:"img/lux_adolphe.jpg"},
+          {ti:"Ascensor panorámico del Pfaffenthal (gratis)", url:pt(P.lux_pfaffenthal), wiki:[null,"Pfaffenthal_Panoramic_Elevator"], img:"img/lux_pfaffenthal.jpg"},
         ]},
       {t:"≈16:30", ti:"Regreso en autobús a Bruselas", d:["Excursión completa: 11h30-12h."]},
     ]},

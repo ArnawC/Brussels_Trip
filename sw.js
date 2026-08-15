@@ -2,7 +2,7 @@
 // Strategy: stale-while-revalidate on same-origin GET requests only —
 // Wikipedia photo lookups and Google Maps links always go straight to the
 // network (or fail silently offline; the app already handles that).
-const CACHE = "bru26-v2";
+const CACHE = "bru26-v3";
 const CORE_ASSETS = [
   "./",
   "./index.html",
@@ -15,10 +15,13 @@ const CORE_ASSETS = [
   "./icon-512.png",
   // Place photos — precached on install so every stop's photo works
   // offline from the very first launch, without needing to open each one.
+  "img/ams_bloemenmarkt.jpg",
   "img/ams_canales.jpg",
   "img/ams_dam.jpg",
+  "img/ams_museumplein.jpg",
   "img/ams_negenstraatjes.jpg",
   "img/ams_nieuwmarkt.jpg",
+  "img/ams_vondelpark.jpg",
   "img/ams_wallen.jpg",
   "img/atomium.jpg",
   "img/berlaymont.jpg",
@@ -30,6 +33,7 @@ const CORE_ASSETS = [
   "img/cinquantenaire.jpg",
   "img/delirium.jpg",
   "img/dinant_ciudadela.jpg",
+  "img/dinant_colegiata.jpg",
   "img/dinant_mosa.jpg",
   "img/dinant_sax.jpg",
   "img/dinant_town.jpg",
@@ -40,10 +44,12 @@ const CORE_ASSETS = [
   "img/gent_vrijdagmarkt.jpg",
   "img/grandplace.jpg",
   "img/koekelberg.jpg",
+  "img/lux_adolphe.jpg",
   "img/lux_bock.jpg",
   "img/lux_corniche.jpg",
   "img/lux_grund.jpg",
   "img/lux_palace.jpg",
+  "img/lux_pfaffenthal.jpg",
   "img/lux_placedarmes.jpg",
   "img/marolles.jpg",
   "img/muro_berlin.jpg",

@@ -1,6 +1,6 @@
 {
-  "name": "Bruselas & Ámsterdam — Planning de viaje",
-  "short_name": "Bru & Ams",
+  "name": "Bruselas — Planning de viaje",
+  "short_name": "Bruselas",
   "description": "Itinerario del viaje del 18 al 22 de agosto de 2026: Bruselas, Brujas, Gante, Ámsterdam, Dinant y Luxemburgo.",
   "start_url": "./index.html",
   "scope": "./",
