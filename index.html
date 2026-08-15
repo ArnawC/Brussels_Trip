@@ -316,6 +316,7 @@
 // ============================================================
 const P = {
   hotel:[50.833145,4.356487], bru:[50.900240,4.485944], crl:[50.460000,4.452800],
+  carrefour_express:[50.833633,4.357007], la_verite:[50.832016,4.356490],
   midi:[50.836440,4.337009], grandplace:[50.846789,4.352436], sablon:[50.840433,4.356253],
   carrefoureuropa:[50.845463,4.356194], saint_hubert:[50.848083,4.355251],
   ste_catherine:[50.850770,4.348130], delirium:[50.848500,4.353883], atomium:[50.894879,4.341555],
@@ -339,7 +340,6 @@ const P = {
   lux_placedarmes:[49.610900,6.129400], lux_adolphe:[49.605300,6.122800], lux_pfaffenthal:[49.615500,6.130700],
 };
 function pt(p){ return `https://www.google.com/maps/search/?api=1&query=${p[0]},${p[1]}`; }
-function ptAddr(addr){ return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(addr)}`; }
 function dir(points, mode){
   const o = points[0], d = points[points.length-1], mid = points.slice(1,-1);
   let u = `https://www.google.com/maps/dir/?api=1&origin=${o[0]},${o[1]}&destination=${d[0]},${d[1]}&travelmode=${mode||"walking"}`;
@@ -525,8 +525,8 @@ const INFO = {
   ],
   hotel:["CityBox Brussels Centre Louise","Rue Dejoncker 53, 1060 Bruselas"],
   comida:[
-    {name:"Carrefour Express (Place Stéphanie)", desc:"Chaussée de Charleroi 3, 1060 Saint-Gilles — a 2 min del hotel. Para desayuno, picoteo o algo rápido a cualquier hora.", url:ptAddr("Carrefour Express, Chaussée de Charleroi 3, 1060 Saint-Gilles, Belgium")},
-    {name:"La Vérité Si Je Mange", desc:"Chaussée de Charleroi 45, 1060 Saint-Gilles — sandwichería/traiteur. Lu-Vi 6:00-16:00, Sáb 8:00-16:00, cerrado domingo. Solo vale para desayuno o comida — para cenar no sirve (cierra a las 16:00 y las cenas del viaje no caen cerca del hotel).", url:ptAddr("La Vérité Si Je Mange, Chaussée de Charleroi 45, 1060 Saint-Gilles, Belgium")},
+    {name:"Carrefour Express (Place Stéphanie)", desc:"Chaussée de Charleroi 3, 1060 Saint-Gilles — a 2 min del hotel. Para desayuno, picoteo o algo rápido a cualquier hora.", url:pt(P.carrefour_express)},
+    {name:"La Vérité Si Je Mange", desc:"Chaussée de Charleroi 45, 1060 Saint-Gilles — sandwichería/traiteur. Lu-Vi 6:00-16:00, Sáb 8:00-16:00, cerrado domingo. Solo vale para desayuno o comida — para cenar no sirve (cierra a las 16:00 y las cenas del viaje no caen cerca del hotel).", url:pt(P.la_verite)},
   ],
   reservas:[
     ["Free Tour por Bruselas","Martes 18, 17:00–19:00 · Grand Place"],
