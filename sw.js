@@ -2,7 +2,7 @@
 // Strategy: stale-while-revalidate on same-origin GET requests only —
 // Wikipedia photo lookups and Google Maps links always go straight to the
 // network (or fail silently offline; the app already handles that).
-const CACHE = "bru26-v5";
+const CACHE = "bru26-v6";
 const CORE_ASSETS = [
   "./",
   "./index.html",
@@ -34,6 +34,7 @@ const CORE_ASSETS = [
   "img/brugge_minnewater.jpg",
   "img/brugge_onzelievevrouw.jpg",
   "img/brugge_rozenhoedkaai.jpg",
+  "img/jan_van_eyckplein.jpg",
   "img/brugge_santasangre.jpg",
   "img/brugge_vismarkt.jpg",
   "img/chocolate_line.jpg",
@@ -56,6 +57,8 @@ const CORE_ASSETS = [
   "img/gent_patershol.jpg",
   "img/gent_sintniklaas.jpg",
   "img/gent_stbavo.jpg",
+  "img/place_royale.jpg",
+  "img/werregarenstraat.jpg",
   "img/gent_vrijdagmarkt.jpg",
   "img/grandplace.jpg",
   "img/koekelberg.jpg",
