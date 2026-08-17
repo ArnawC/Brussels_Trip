@@ -380,9 +380,9 @@ const DAYS = [
       {t:"15:15–15:55", ti:"Caminar de vuelta a Grand Place", d:["35-40 min a pie desde el Cincuentenario, cruzando el Parque de Bruselas.","Alternativa más rápida: metro Merode → Trône (~10 min) + 10 min a pie."], url:dir([P.cinquantenaire,P.grandplace],"walking")},
       {t:"15:55–16:45", ti:"Tiempo libre cerca de Grand Place", free:true, d:["Pausa con calma antes del free tour — el propio tour de las 17:00 ya cubre Manneken Pis, la Bolsa, los murales, Sablon, el Palacio de Justicia, la Plaza Real, la Catedral y Mont des Arts, así que aquí van cosas que NO veréis luego."],
         subs:[
-          {ti:"Rue des Bouchers (calle de los restaurantes)", url:pt(P.rue_bouchers), img:"img/rue_bouchers.jpg"},
-          {ti:"Théâtre Royal de Toone (teatro de marionetas + taberna)", url:pt(P.toone), wiki:[null,"Royal_Theatre_Toone"], img:"img/toone.jpg"},
-          {ti:"Choco-Story (Museo del Cacao y el Chocolate, opcional ~€14)", url:pt(P.chocostory), wiki:[null,"Choco-Story_Brussels"], img:"img/chocostory.jpg"},
+          {ti:"Rue des Bouchers (calle de los restaurantes)", d:["Callejón peatonal lleno de terrazas y marisco expuesto en hielo — muy turístico pero típico."], url:pt(P.rue_bouchers), img:"img/rue_bouchers.jpg"},
+          {ti:"Théâtre Royal de Toone (teatro de marionetas + taberna)", d:["Teatro de marionetas de vara activo desde 1830, con una taberna dentro — el único guiñol tradicional de Bruselas que sigue en marcha."], url:pt(P.toone), wiki:[null,"Royal_Theatre_Toone"], img:"img/toone.jpg"},
+          {ti:"Choco-Story (Museo del Cacao y el Chocolate, opcional ~€14)", d:["Museo dedicado al cacao y el chocolate, con degustación incluida en la entrada."], url:pt(P.chocostory), wiki:[null,"Choco-Story_Brussels"], img:"img/chocostory.jpg"},
         ]},
     ]},
     {name:"Atardecer — Free Tour", stops:[
@@ -461,10 +461,10 @@ const DAYS = [
           {ti:"Plaza Dam", url:pt(P.ams_dam), wiki:["Plaza_Dam","Dam_Square"], img:"img/ams_dam.jpg"},
           {ti:"Barrio Rojo (De Wallen)", url:pt(P.ams_wallen), wiki:["De_Wallen","De_Wallen"], img:"img/ams_wallen.jpg"},
           {ti:"Nieuwmarkt", url:pt(P.ams_nieuwmarkt), wiki:["Nieuwmarkt","Nieuwmarkt,_Amsterdam"], img:"img/ams_nieuwmarkt.jpg"},
-          {ti:"Nueve Calles (De Negen Straatjes)", url:pt(P.ams_negenstraatjes), wiki:[null,"Negen_Straatjes"], img:"img/ams_negenstraatjes.jpg"},
-          {ti:"Bloemenmarkt (mercado flotante de flores)", url:pt(P.ams_bloemenmarkt), wiki:[null,"Bloemenmarkt"], img:"img/ams_bloemenmarkt.jpg"},
-          {ti:"Museumplein (Rijksmuseum + Van Gogh Museum por fuera)", url:pt(P.ams_museumplein), wiki:[null,"Museumplein"], img:"img/ams_museumplein.jpg"},
-          {ti:"Vondelpark (algo más lejos, si sobra tiempo)", url:pt(P.ams_vondelpark), wiki:[null,"Vondelpark"], img:"img/ams_vondelpark.jpg"},
+          {ti:"Nueve Calles (De Negen Straatjes)", d:["Nueve callejuelas con tiendas independientes y boutiques, entre el Dam y el anillo de canales."], url:pt(P.ams_negenstraatjes), wiki:[null,"Negen_Straatjes"], img:"img/ams_negenstraatjes.jpg"},
+          {ti:"Bloemenmarkt (mercado flotante de flores)", d:["El único mercado flotante de flores del mundo, sobre el canal Singel."], url:pt(P.ams_bloemenmarkt), wiki:[null,"Bloemenmarkt"], img:"img/ams_bloemenmarkt.jpg"},
+          {ti:"Museumplein (Rijksmuseum + Van Gogh Museum por fuera)", d:["Gran plaza verde con el Rijksmuseum, el Museo Van Gogh y el Concertgebouw alrededor."], url:pt(P.ams_museumplein), wiki:[null,"Museumplein"], img:"img/ams_museumplein.jpg"},
+          {ti:"Vondelpark (algo más lejos, si sobra tiempo)", d:["El parque más famoso de Ámsterdam, ideal para un paseo tranquilo."], url:pt(P.ams_vondelpark), wiki:[null,"Vondelpark"], img:"img/ams_vondelpark.jpg"},
         ]},
       {t:"por la tarde", ti:"Regreso en autobús a Bruselas", d:["~3h30. Excursión de ~12h en total desde las 8:00."]},
     ]},
@@ -484,9 +484,9 @@ const DAYS = [
       {t:"08:00", ti:"Autobús hacia Dinant", kind:"reserved", d:["Colegiata de Notre-Dame, Casa de Adolphe Sax, Maison Leffe."], url:pt(P.carrefoureuropa), wiki:["Dinant","Dinant"], img:"img/dinant_town.jpg"},
       {t:"≈10:30–11:30", ti:"Tiempo libre en Dinant", free:true, d:["El guía ya señala la colegiata y la Casa de Adolphe Sax desde el bus — con este rato podéis acercaros por vuestra cuenta.","Es un rato corto — no da para pararse a comer aquí, eso será en Luxemburgo."],
         subs:[
-          {ti:"Colegiata de Notre-Dame de Dinant", url:pt(P.dinant_colegiata), wiki:[null,"Collegiate_Church_of_Our_Lady,_Dinant"], img:"img/dinant_colegiata.jpg"},
-          {ti:"Ciudadela de Dinant (mirador + teleférico, de pago)", url:pt(P.dinant_ciudadela), wiki:["Ciudadela_de_Dinant","Citadel_of_Dinant"], img:"img/dinant_ciudadela.jpg"},
-          {ti:"Paseo junto al río Mosa", url:pt(P.dinant_mosa), wiki:[null,"Meuse"], img:"img/dinant_mosa.jpg"},
+          {ti:"Colegiata de Notre-Dame de Dinant", d:["Iglesia gótica del siglo XIII con su característica torre en forma de pera, junto al río."], url:pt(P.dinant_colegiata), wiki:[null,"Collegiate_Church_of_Our_Lady,_Dinant"], img:"img/dinant_colegiata.jpg"},
+          {ti:"Ciudadela de Dinant (mirador + teleférico, de pago)", d:["Fortaleza en lo alto del acantilado con vistas sobre el Mosa y la ciudad."], url:pt(P.dinant_ciudadela), wiki:["Ciudadela_de_Dinant","Citadel_of_Dinant"], img:"img/dinant_ciudadela.jpg"},
+          {ti:"Paseo junto al río Mosa", d:["Paseo tranquilo junto al río, con la ciudadela y la colegiata como telón de fondo."], url:pt(P.dinant_mosa), wiki:[null,"Meuse"], img:"img/dinant_mosa.jpg"},
           {ti:"Casa de Adolphe Sax (exterior)", url:pt(P.dinant_sax), wiki:["Adolphe_Sax","Adolphe_Sax"], img:"img/dinant_sax.jpg"},
         ]},
     ]},
@@ -497,12 +497,12 @@ const DAYS = [
     {name:"Tarde", stops:[
       {t:"≈14:00–16:30", ti:"Tiempo libre en Luxemburgo", free:true, d:["El tour a pie ya cubre el Palacio Ducal, Hôtel de Ville y la catedral — este rato es para explorar los miradores y el Grund.","Este es el momento del día para comer con calma — Place d'Armes tiene varias terrazas."],
         subs:[
-          {ti:"Chemin de la Corniche (\"el balcón más bonito de Europa\")", url:pt(P.lux_corniche), img:"img/lux_corniche.jpg"},
-          {ti:"Casemates du Bock (fortificaciones, exterior gratis)", url:pt(P.lux_bock), wiki:[null,"Bock_(Luxembourg)"], img:"img/lux_bock.jpg"},
-          {ti:"Barrio del Grund (junto al río Alzette)", url:pt(P.lux_grund), img:"img/lux_grund.jpg"},
-          {ti:"Place d'Armes (centro, terrazas)", url:pt(P.lux_placedarmes), wiki:[null,"Place_d'Armes_(Luxembourg)"], img:"img/lux_placedarmes.jpg"},
-          {ti:"Puente Adolphe", url:pt(P.lux_adolphe), wiki:[null,"Adolphe_Bridge"], img:"img/lux_adolphe.jpg"},
-          {ti:"Ascensor panorámico del Pfaffenthal (gratis)", url:pt(P.lux_pfaffenthal), wiki:[null,"Pfaffenthal_Panoramic_Elevator"], img:"img/lux_pfaffenthal.jpg"},
+          {ti:"Chemin de la Corniche (\"el balcón más bonito de Europa\")", d:["Paseo con vistas sobre el valle del Alzette y el barrio del Grund."], url:pt(P.lux_corniche), img:"img/lux_corniche.jpg"},
+          {ti:"Casemates du Bock (fortificaciones, exterior gratis)", d:["Restos de las antiguas fortificaciones de Luxemburgo, excavadas en la roca. Vistas gratis desde fuera; galerías interiores de pago."], url:pt(P.lux_bock), wiki:[null,"Bock_(Luxembourg)"], img:"img/lux_bock.jpg"},
+          {ti:"Barrio del Grund (junto al río Alzette)", d:["Barrio bajo con casas antiguas y ambiente tranquilo, se llega bajando desde el casco histórico."], url:pt(P.lux_grund), img:"img/lux_grund.jpg"},
+          {ti:"Place d'Armes (centro, terrazas)", d:["La plaza central de Luxemburgo, rodeada de terrazas y con conciertos en el quiosco en verano."], url:pt(P.lux_placedarmes), wiki:[null,"Place_d'Armes_(Luxembourg)"], img:"img/lux_placedarmes.jpg"},
+          {ti:"Puente Adolphe", d:["El puente más emblemático de Luxemburgo, sobre el valle del Petrusse."], url:pt(P.lux_adolphe), wiki:[null,"Adolphe_Bridge"], img:"img/lux_adolphe.jpg"},
+          {ti:"Ascensor panorámico del Pfaffenthal (gratis)", d:["Baja desde el casco histórico hasta el valle de Pfaffenthal, con vistas espectaculares."], url:pt(P.lux_pfaffenthal), wiki:[null,"Pfaffenthal_Panoramic_Elevator"], img:"img/lux_pfaffenthal.jpg"},
         ]},
       {t:"≈16:30", ti:"Regreso en autobús a Bruselas", d:["Excursión completa: 11h30-12h."]},
     ]},
@@ -673,9 +673,12 @@ async function fetchWiki(pair){
   if(!pair) return null;
   const key = pair.join("|");
   if(wikiCache[key] !== undefined) return wikiCache[key];
+  // Spanish only — no English fallback. The photo already comes from a
+  // local file regardless, so the only thing this text adds is a bonus
+  // paragraph; showing it in English would defeat the point of the app
+  // being in Spanish, so we'd rather show nothing than the wrong language.
   const tries = [];
   if(pair[0]) tries.push(["es", pair[0]]);
-  if(pair[1]) tries.push(["en", pair[1]]);
   lastFetchHadNetworkError = false;
   for(const [lang, title] of tries){
     try{
