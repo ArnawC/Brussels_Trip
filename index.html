@@ -325,6 +325,8 @@ const P = {
   parc_leopold:[50.838900,4.378300], berlaymont:[50.843800,4.381600], parlamento:[50.838600,4.376100],
   muro_berlin:[50.839600,4.379800],
   rue_bouchers:[50.847541,4.355505], toone:[50.847715,4.353719], chocostory:[50.845493,4.349857],
+  palacio_real:[50.841928,4.362272], parque_bruselas:[50.844595,4.363653], mim:[50.842836,4.359096],
+  sablon_iglesia:[50.840333,4.356199],
   brugge_station:[51.197666,3.217851], brugge_markt:[51.208147,3.224801], brugge_burg:[51.208506,3.226838],
   brugge_onzelievevrouw:[51.204690,3.224447], brugge_begijnhof:[51.201345,3.222709], brugge_minnewater:[51.199729,3.223942],
   brugge_rozenhoedkaai:[51.206500,3.227300], brugge_vismarkt:[51.208700,3.227600],
@@ -377,8 +379,12 @@ const DAYS = [
       {t:"≈14:45–15:15", ti:"Cincuentenario + Arco del Triunfo", d:["8-10 min a pie desde Berlaymont/Parque Leopold.","Entrada libre. Mirador gratuito en el Museo de Historia Militar."], url:pt(P.cinquantenaire), wiki:["Parque_del_Cincuentenario","Parc_du_Cinquantenaire"], img:"img/cinquantenaire.jpg"},
     ]},
     {name:"Tarde", stops:[
-      {t:"15:15–15:55", ti:"Caminar de vuelta a Grand Place", d:["35-40 min a pie desde el Cincuentenario, cruzando el Parque de Bruselas.","Alternativa más rápida: metro Merode → Trône (~10 min) + 10 min a pie."], url:dir([P.cinquantenaire,P.grandplace],"walking")},
-      {t:"15:55–16:45", ti:"Tiempo libre cerca de Grand Place", free:true, d:["Pausa con calma antes del free tour — el propio tour de las 17:00 ya cubre Manneken Pis, la Bolsa, los murales, Sablon, el Palacio de Justicia, la Plaza Real, la Catedral y Mont des Arts, así que aquí van cosas que NO veréis luego."],
+      {t:"15:15–15:35", ti:"Caminar hacia el Parque de Bruselas", d:["~20 min a pie desde el Cincuentenario.","Alternativa más rápida: metro Merode → Trône (~10 min) + 5 min a pie."], url:dir([P.cinquantenaire,P.parque_bruselas],"walking")},
+      {t:"15:35–15:50", ti:"Parque de Bruselas (Brussels Park)", d:["El parque urbano más grande y antiguo del centro, entre el Palacio Real y el Parlamento belga."], url:pt(P.parque_bruselas), wiki:["Parque_de_Bruselas","Brussels_Park"], img:"img/parque_bruselas.jpg"},
+      {t:"15:50–16:00", ti:"Palacio Real de Bruselas", d:["Residencia oficial de los reyes belgas — no viven aquí, es de uso protocolario. Solo se visita por dentro unas semanas en verano."], url:pt(P.palacio_real), wiki:["Palacio_Real_de_Bruselas","Royal_Palace_of_Brussels"], img:"img/palacio_real.jpg"},
+      {t:"16:00–16:15", ti:"Museo de Instrumentos Musicales (MIM)", d:["En el edificio Art Nouveau \"Old England\". Interior de pago (OPCIONAL); el propio edificio ya merece la foto por fuera."], url:pt(P.mim), wiki:[null,"Musical Instruments Museum, Brussels"], img:"img/mim.jpg"},
+      {t:"16:15–16:35", ti:"Caminar hacia Grand Place", d:["~20 min a pie desde el MIM."], url:dir([P.mim,P.grandplace],"walking")},
+      {t:"16:35–16:45", ti:"Tiempo libre cerca de Grand Place", free:true, d:["Pausa corta antes del free tour — el propio tour de las 17:00 ya cubre Manneken Pis, la Bolsa, los murales, Sablon, el Palacio de Justicia, la Plaza Real, la Catedral y Mont des Arts, así que aquí van cosas que NO veréis luego."],
         subs:[
           {ti:"Rue des Bouchers (calle de los restaurantes)", d:["Callejón peatonal lleno de terrazas y marisco expuesto en hielo — muy turístico pero típico."], url:pt(P.rue_bouchers), img:"img/rue_bouchers.jpg"},
           {ti:"Théâtre Royal de Toone (teatro de marionetas + taberna)", d:["Teatro de marionetas de vara activo desde 1830, con una taberna dentro — el único guiñol tradicional de Bruselas que sigue en marcha."], url:pt(P.toone), wiki:[null,"Royal_Theatre_Toone"], img:"img/toone.jpg"},
@@ -526,7 +532,8 @@ const DAYS = [
       {t:"≈09:25", ti:"Metro hacia Puerta de Halle", kind:"metro", d:["Directo por la línea 6, sin transbordo (~20-25 min) — el Cincuentenario ya no está en el camino, se ve el Día 1."], url:dir([P.atomium,P.porte_hal],"transit")},
       {t:"09:50–10:25", ti:"Puerta de Halle", d:["Última puerta de la muralla medieval. Museo interior de pago (OPCIONAL, ~€10)."], url:pt(P.porte_hal), wiki:["Puerta_de_Halle","Halle_Gate"], img:"img/porte_hal.jpg"},
       {t:"10:35–11:35", ti:"Mercadillo de las Marolles", d:["Antigüedades al aire libre, hasta las 14:00. Solo efectivo."], url:pt(P.marolles), wiki:[null,"Place_du_Jeu_de_Balle"], img:"img/marolles.jpg"},
-      {t:"11:45–12:35", ti:"Grand Sablon + Petit Sablon", d:["Chocolaterías, anticuarios y jardín con 48 estatuas de bronce."], url:pt(P.sablon), wiki:[null,"Sablon,_Brussels"], img:"img/sablon.jpg"},
+      {t:"11:45–12:00", ti:"Iglesia de Nuestra Señora del Sablón", d:["Iglesia gótica del siglo XV, justo en la plaza — entrada libre."], url:pt(P.sablon_iglesia), wiki:[null,"Church_of_Our_Blessed_Lady_of_the_Sablon"], img:"img/sablon_iglesia.jpg"},
+      {t:"12:00–12:35", ti:"Grand Sablon + Petit Sablon", d:["Chocolaterías, anticuarios y jardín con 48 estatuas de bronce."], url:pt(P.sablon), wiki:[null,"Sablon,_Brussels"], img:"img/sablon.jpg"},
     ]},
     {name:"Mediodía — Traslado al aeropuerto", stops:[
       {t:"12:35", ti:"Caminar al hotel", d:["12-15 min a pie desde Sablon."], url:dir([P.sablon,P.hotel],"walking")},
