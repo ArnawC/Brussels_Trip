@@ -403,7 +403,7 @@ const DAYS = [
   sections:[
     {name:"Mañana", stops:[
       {t:"08:00", ti:"Caminar hacia Bruxelles-Midi", d:["18-20 min a pie desde el hotel."], url:dir([P.hotel,P.midi],"walking")},
-      {t:"≈08:30", ti:"Tren directo a Brujas", kind:"metro", d:["~1h. Trenes IC frecuentes desde Bruxelles-Midi/Central/Nord.","Billete: 'Standard Ticket' Bruxelles → Brugge en la app/web SNCB-NMBS (belgiantrain.be). No hay que reservar asiento ni coger un tren concreto: vale para cualquiera dentro de su validez.","Al comprarlo con la cuenta de ella (24), con su fecha de nacimiento puesta, se aplica solo el 40% Youth -26. Él (26) lo compra a tarifa normal."]},
+      {t:"≈08:30", ti:"Tren directo a Brujas", kind:"metro", d:["~1h. Trenes IC frecuentes desde Bruxelles-Midi/Central/Nord.","Billete: 'Standard Ticket' Bruxelles → Brugge en la app/web SNCB-NMBS (belgiantrain.be). No hay que reservar asiento ni coger un tren concreto: vale para cualquiera dentro de su validez.","Precio orientativo: ~€17,60 tarifa normal · ~€10,55 con Youth -26 (40% dto.).","Al comprarlo con la cuenta de ella (24), con su fecha de nacimiento puesta, se aplica solo el 40% Youth -26. Él (26) lo compra a tarifa normal."]},
       {t:"≈09:30", ti:"Llegada a Brujas — caminar al centro", d:["10 min a pie hasta el Lago del Amor."], url:dir([P.brugge_station,P.brugge_minnewater],"walking")},
       {t:"09:35–09:50", ti:"Lago del Amor (Minnewater)", d:["Paseo romántico junto al canal — gratis."], url:pt(P.brugge_minnewater), img:"img/brugge_minnewater.jpg"},
       {t:"09:50–10:00", ti:"Begijnhof (Beaterio de Brujas)", d:["Recinto de casitas blancas alrededor de un jardín — gratis, justo al lado del lago."], url:pt(P.brugge_begijnhof), wiki:[null,"Princely_Beguinage_Ten_Wijngaerde,_Bruges"], img:"img/brugge_begijnhof.jpg"},
@@ -423,7 +423,7 @@ const DAYS = [
     {name:"Mediodía", stops:[
       {t:"13:00–14:00", ti:"Comida en Brujas", d:["Zona del Markt, algo más allá de la plaza."]},
       {t:"≈14:15", ti:"Caminar a la estación de Brujas", d:["15-20 min a pie."], url:dir([P.brugge_markt,P.brugge_station],"walking")},
-      {t:"≈14:30", ti:"Tren Brujas → Gante", kind:"metro", d:["~25-30 min, trenes frecuentes.","Billete: 'Standard Ticket' Brugge → Gent-Sint-Pieters — otro billete distinto al del primer tramo, mismo descuento Youth -26 para ella."]},
+      {t:"≈14:30", ti:"Tren Brujas → Gante", kind:"metro", d:["~25-30 min, trenes frecuentes.","Billete: 'Standard Ticket' Brugge → Gent-Sint-Pieters — otro billete distinto al del primer tramo, mismo descuento Youth -26 para ella.","Precio orientativo: ~€9-10 tarifa normal · ~€5,50-6 con Youth -26."]},
     ]},
     {name:"Tarde", stops:[
       {t:"≈15:00", ti:"Llegada a Gante — Puente de San Miguel", d:["20 min a pie desde Gent-Sint-Pieters."], url:dir([P.gent_station,P.gent_michielsbrug],"walking")},
@@ -440,11 +440,11 @@ const DAYS = [
     ]},
     {name:"Noche", stops:[
       {t:"18:30–19:30", ti:"Cena en Gante", d:["Zona de Graslei/Patershol, buen ambiente."]},
-      {t:"≈19:45", ti:"Tren Gante → Bruselas", kind:"metro", d:["Directo, ~35-40 min a Bruxelles-Midi/Central.","Billete: 'Standard Ticket' Gent-Sint-Pieters → Bruxelles, el tercer y último billete del día — mismo sistema que los anteriores."]},
+      {t:"≈19:45", ti:"Tren Gante → Bruselas", kind:"metro", d:["Directo, ~35-40 min a Bruxelles-Midi/Central.","Billete: 'Standard Ticket' Gent-Sint-Pieters → Bruxelles, el tercer y último billete del día — mismo sistema que los anteriores.","Precio orientativo: ~€11 tarifa normal · ~€6,60 con Youth -26."]},
       {t:"≈20:45", ti:"Caminar al hotel", d:["18-20 min a pie desde Bruxelles-Midi."], url:dir([P.midi,P.hotel],"walking")},
     ]},
   ],
-  note:"Descuento \"Youth (-26)\": ella (24) viaja 40% más barata en los 3 trayectos — comprar con su fecha de nacimiento en la cuenta SNCB. Él (26) ya paga tarifa normal."
+  note:"Descuento \"Youth (-26)\": ella (24) viaja 40% más barata en los 3 trayectos — comprar con su fecha de nacimiento en la cuenta SNCB. Él (26) ya paga tarifa normal. Son 3 billetes separados a propósito: la SNCB ya no permite interrumpir un billete estándar y reanudarlo horas después, así que no se puede comprar Brujas-Bruselas con parada libre en Gante."
 },
 {
   key:"d3", iso:"2026-08-20", short:"Jue 20", date:"Día 3 · Jueves 20 de agosto", title:"Excursión a Ámsterdam",
