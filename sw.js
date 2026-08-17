@@ -2,7 +2,7 @@
 // Strategy: stale-while-revalidate on same-origin GET requests only —
 // Wikipedia photo lookups and Google Maps links always go straight to the
 // network (or fail silently offline; the app already handles that).
-const CACHE = "bru26-v3";
+const CACHE = "bru26-v4";
 const CORE_ASSETS = [
   "./",
   "./index.html",
@@ -25,11 +25,20 @@ const CORE_ASSETS = [
   "img/ams_wallen.jpg",
   "img/atomium.jpg",
   "img/berlaymont.jpg",
+  "img/brugge_begijnhof.jpg",
+  "img/brugge_belfort.jpg",
+  "img/brugge_boat.jpg",
+  "img/brugge_bonifacius.jpg",
   "img/brugge_burg.jpg",
   "img/brugge_markt.jpg",
   "img/brugge_minnewater.jpg",
   "img/brugge_onzelievevrouw.jpg",
   "img/brugge_rozenhoedkaai.jpg",
+  "img/brugge_santasangre.jpg",
+  "img/brugge_vismarkt.jpg",
+  "img/chocolate_line.jpg",
+  "img/chocolatier_dumon.jpeg",
+  "img/chocostory.jpg",
   "img/cinquantenaire.jpg",
   "img/delirium.jpg",
   "img/dinant_ciudadela.jpg",
@@ -37,9 +46,15 @@ const CORE_ASSETS = [
   "img/dinant_mosa.jpg",
   "img/dinant_sax.jpg",
   "img/dinant_town.jpg",
+  "img/esplanade_parlamento.jpg",
+  "img/gent_belfort.jpg",
+  "img/gent_dullegriet.jpg",
   "img/gent_graslei.jpg",
   "img/gent_gravensteen.jpg",
+  "img/gent_groentenmarkt.jpg",
   "img/gent_michielsbrug.jpg",
+  "img/gent_patershol.jpg",
+  "img/gent_sintniklaas.jpg",
   "img/gent_stbavo.jpg",
   "img/gent_vrijdagmarkt.jpg",
   "img/grandplace.jpg",
@@ -55,11 +70,13 @@ const CORE_ASSETS = [
   "img/muro_berlin.jpg",
   "img/parlamento.jpg",
   "img/porte_hal.jpg",
+  "img/rue_bouchers.jpg",
   "img/rueneuve.jpg",
   "img/sablon.jpg",
   "img/saint_gery.jpg",
   "img/saint_hubert.jpg",
   "img/ste_catherine.jpg",
+  "img/toone.jpg",
 ];
 
 self.addEventListener("install", (event) => {
